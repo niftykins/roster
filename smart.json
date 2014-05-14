@@ -1,0 +1,13 @@
+{
+  "packages": {
+    "iron-router": {
+      "version": "0.7.1"
+    },
+    "semantic-ui-less": {
+      "version": "0.16.1"
+    },
+    "spin": {},
+    "find-faster": {},
+    "fast-render": {}
+  }
+}

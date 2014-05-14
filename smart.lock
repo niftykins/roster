@@ -1,0 +1,48 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "iron-router": {
+        "version": "0.7.1"
+      },
+      "semantic-ui-less": {
+        "version": "0.16.1"
+      },
+      "spin": {},
+      "find-faster": {},
+      "fast-render": {}
+    },
+    "packages": {
+      "iron-router": {
+        "git": "https://github.com/EventedMind/iron-router.git",
+        "tag": "v0.7.1",
+        "commit": "d1ffb3f06ea4c112132b030f2eb1a70b81675ecb"
+      },
+      "semantic-ui-less": {
+        "git": "https://github.com/nooitaf/meteor-semantic-ui-less.git",
+        "tag": "v0.16.1",
+        "commit": "13d26eac3e92614cb89b54aaa3b8dbd041ed3861"
+      },
+      "spin": {
+        "git": "https://github.com/SachaG/meteor-spin.git",
+        "tag": "v0.2.2",
+        "commit": "3f655f0016228e4195acc784c45d3e3a247dc39f"
+      },
+      "find-faster": {
+        "git": "https://github.com/arunoda/meteor-find-faster.git",
+        "tag": "v0.1.3",
+        "commit": "b821858e34692aa89782a06c32a88b735b2885ab"
+      },
+      "fast-render": {
+        "git": "https://github.com/arunoda/meteor-fast-render.git",
+        "tag": "v0.2.5",
+        "commit": "93e2fb334e55fbe9b5ebb2a2e65964018658f43e"
+      },
+      "blaze-layout": {
+        "git": "https://github.com/EventedMind/blaze-layout.git",
+        "tag": "v0.2.4",
+        "commit": "b40e9b0612329288d75cf52ad14a7da64bb8618f"
+      }
+    }
+  }
+}

@@ -1,0 +1,318 @@
+@segment-color: #D1D1D1;
+@bg-color: #E4E4E4;
+
+@dk-color: #C41F3B;
+@paladin-color: #F58CBA;
+@priest-color: #FFFFFF;
+@warlock-color: #9482C9;
+@shaman-color: #0070DE;
+@mage-color: #69CCF0;
+@monk-color: #00FF96;
+@hunter-color: #ABD473;
+@rogue-color: #FFF569;
+@warrior-color: #C79C6E;
+@druid-color: #FF7D0A;
+
+// MIXINS
+
+.classColor(@color) {
+	background-color: @color;
+	border-color: @color;
+}
+
+
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+
+body {
+	font-family: 'Lato', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+	font-size: 16px;
+	background-color: @bg-color;
+}
+
+.show {
+	display: block !important;
+}
+
+.ui.grid {
+	font-size: inherit;
+}
+
+.bigger.icon {
+	font-size: 3em;
+	vertical-align: middle;
+}
+
+.spinner {
+	top: -100px;
+}
+
+.ui.left.floated.image {
+	margin-right: 0;
+}
+
+// SEARCH
+
+.filter {
+	position: fixed !important;
+	top: 0;
+	left:0;
+	z-index: 20;
+	width: 100%;
+	height: 100px;
+	background-color: @bg-color;
+
+	& .input {
+		margin: auto;
+		width: 340px;
+		display: block;
+		margin-top: 16px;
+	}
+
+	& .counter {
+		text-align: center;
+		margin-top: 2px;
+	}
+}
+
+// ROSTER
+
+.bosses {
+	margin-top: 100px;
+
+	& .notfound {
+		margin-top: 20px;
+		text-align: center;
+		font-size: 22pt;
+	}
+}
+
+.boss {
+	background-color: @segment-color !important;
+
+	.panel {
+		width: 20% !important;
+		text-align: center !important;
+
+		& > h2 {
+			margin-bottom: 0;
+		}
+
+		& > h3 {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+
+		& .spot {
+			margin-top: 1em;
+			width: 40px;
+			display: inline-block;
+
+			& > i {
+				margin: auto;
+				display: block;
+				cursor: pointer;
+			}
+
+			& > span {
+				display: block;
+			}
+
+			& > img {
+				width: 25px;
+			}
+		}
+	}
+
+	.slots {
+		width: 79% !important;
+
+		.row {
+			margin-bottom: 15px;
+			margin-left: 60px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			.player {
+				cursor: pointer;
+				width: 104px;
+				height: 50px;
+				line-height: 50px;
+				text-align: center;
+				margin-right: 4px;
+				display: inline-block;
+				border-radius: 5px;
+				margin-bottom: 8px;
+
+				&.out {
+					opacity: 0.35;
+				}
+
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+		}
+	}
+}
+
+// LOGIN BUTTON
+
+.menu.buttons {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 30;
+
+	& > a {
+		text-decoration: none;
+
+		& > i {
+			margin-right: 0 !important;
+		}
+	}
+}
+
+// SUBMIT FORMS
+
+.remove.form,
+.player.form {
+	position: relative;
+	width: 450px;
+	margin: auto;
+	margin-top: 10%;
+
+	& > form {
+		position: relative;
+		width: 450px;
+		background-color: @segment-color;
+		box-shadow: 0 0 0 0;
+
+		& .classes,
+		& .roles {
+			& .row {
+				margin-bottom: 5px;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+
+				& .class,
+				& .role {
+					cursor: pointer;
+					width: 93px;
+					height: 50px;
+					margin-right: 4px;
+					display: inline-block;
+					border-radius: 5px;
+					border-width: 3px;
+					border-style: solid;
+
+					&:last-child {
+						margin-right: 0;
+					}
+				}
+
+				& .role {
+					& > img {
+						margin: auto;
+						display: block;
+					}
+
+					&.active {
+						border-color: black !important;
+					}
+					&.caster {
+						.classColor(#8F8F8F);
+					}
+					&.melee {
+						.classColor(#8F8F8F);
+					}
+					&.healer {
+						.classColor(#8F8F8F);
+					}
+					&.tank {
+						.classColor(#8F8F8F);
+					}
+				}
+
+				& .class {
+					&.active {
+						border-color: black !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+.login.form {
+	position: relative;
+	width: 750px;
+	margin: auto;
+	margin-top: 10%;
+
+	& > .panel {
+		position: absolute;
+		right: 20px;
+		top: -10px;
+		width: 250px;
+	}
+
+	& > form {
+		position: relative;
+		width: 450px;
+		background-color: @segment-color;
+		box-shadow: 0 0 0 0;
+
+		&:before {
+			content: '';
+			border-style: solid;
+			border-width: 12px;
+			border-color: transparent;
+			border-left-color: @segment-color;
+			height: 0;
+			position: absolute;
+			width: 0;
+			right: -24px;
+			top: 80px;
+		}
+	}
+}
+
+// CLASS COLORS
+
+.rogue {
+	.classColor(@rogue-color);
+}
+.warrior {
+	.classColor(@warrior-color);
+}
+.druid {
+	.classColor(@druid-color);
+}
+.dk {
+	.classColor(@dk-color);
+}
+.paladin {
+	.classColor(@paladin-color);
+}
+.priest {
+	.classColor(@priest-color);
+}
+.warlock {
+	.classColor(@warlock-color);
+}
+.shaman {
+	.classColor(@shaman-color);
+}
+.mage {
+	.classColor(@mage-color);
+}
+.monk {
+	.classColor(@monk-color);
+}
+.hunter {
+	.classColor(@hunter-color);
+}
