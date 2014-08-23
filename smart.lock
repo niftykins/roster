@@ -10,7 +10,8 @@
       },
       "spin": {},
       "find-faster": {},
-      "fast-render": {}
+      "fast-render": {},
+      "kadira": {}
     },
     "packages": {
       "iron-router": {
@@ -25,8 +26,8 @@
       },
       "spin": {
         "git": "https://github.com/SachaG/meteor-spin.git",
-        "tag": "v0.2.2",
-        "commit": "3f655f0016228e4195acc784c45d3e3a247dc39f"
+        "tag": "v2.0.4",
+        "commit": "f7b1e12a7caff1283cdb3671a393c182d0ae9862"
       },
       "find-faster": {
         "git": "https://github.com/arunoda/meteor-find-faster.git",
@@ -35,8 +36,13 @@
       },
       "fast-render": {
         "git": "https://github.com/arunoda/meteor-fast-render.git",
-        "tag": "v0.2.5",
-        "commit": "93e2fb334e55fbe9b5ebb2a2e65964018658f43e"
+        "tag": "v1.0.0",
+        "commit": "acbc04982025fe78cebb8865b5a04689741d4b0b"
+      },
+      "kadira": {
+        "git": "https://github.com/meteorhacks/kadira.git",
+        "tag": "v2.4.13",
+        "commit": "1f3c1a427084af5a2eca2e299eb65bc01387df8a"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
