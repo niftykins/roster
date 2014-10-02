@@ -91,9 +91,17 @@ Template.login.events({
 	}
 });
 
+Template.search.rendered = function() {
+	Meteor.typeahead(this.find('input'));
+};
+
 Template.search.helpers({
 	'countBosses': function() {
 		return filterBosses.length;
+	},
+
+	'names': function() {
+		return Players.find().fetch().map(function(e) { return e.name; });
 	}
 });
 

@@ -101,7 +101,7 @@
 <template name="search">
 	<div class="filter">
 		<div class="ui huge icon input">
-			<input type="text" placeholder="Search..." value="{{getFilter}}">
+			<input class="typeahead" type="text" placeholder="Search..." value="{{getFilter}}" data-source="names" data-hint="true">
 			{{#if getFilter}}
 				<i class="close icon" style="cursor: pointer;"></i>
 			{{else}}
