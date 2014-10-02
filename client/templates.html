@@ -86,7 +86,11 @@
 	<div class="bosses">
 		{{#if this.length}}
 			{{#each this}}
-				{{> boss}}
+				{{#if gridView}}
+					{{> boss_mini}}
+				{{else}}
+					{{> boss}}
+				{{/if}}
 			{{/each}}
 		{{else}}
 			{{#if getFilter}}
@@ -110,12 +114,29 @@
 		</div>
 
 		{{#if getFilter}}
+			<div class="view">
+				{{#if gridView}}
+					<i class="reorder icon"></i>
+				{{else}}
+					<i class="block layout icon"></i>
+				{{/if}}
+			</div>
+
 			{{#if countBosses}}
 				<div class="counter">
 					{{getFilter}} is in for {{pluralize countBosses 'boss'}}
 				</div>
 			{{/if}}
 		{{/if}}
+	</div>
+</template>
+
+<template name="boss_mini">
+	<div name="{{name}}" class="ui segment boss-mini">
+		<div class="panel">
+			<img class="ui image" src="/{{name}}.png">
+			<h2>{{name}}</h2>
+		</div>
 	</div>
 </template>
 

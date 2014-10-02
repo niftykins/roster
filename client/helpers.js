@@ -12,6 +12,10 @@ UI.registerHelper('getFilter', function() {
 	return Session.get('filter');
 });
 
+UI.registerHelper('gridView', function() {
+	return Session.get('view');
+});
+
 UI.registerHelper('pluralize', function(n, thing) {
 	if(n === 1) return '1 ' + thing;
 	else return n + ' ' + thing + 'es';
@@ -118,6 +122,13 @@ Template.search.events({
 
 	'click .close': function(e) {
 		Session.set('filter', null);
+	},
+
+	'click .view i': function(e) {
+		if ($(e.target).hasClass('block'))
+			Session.set('view', true);
+		else
+			Session.set('view', false);
 	}
 });
 

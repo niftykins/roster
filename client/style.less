@@ -70,10 +70,12 @@ body {
 	background-color: @bg-color;
 
 	& .input {
+		position: relative;
 		margin: auto;
 		width: 340px;
 		display: block;
 		margin-top: 16px;
+		z-index: 25;
 	}
 
 	& .counter {
@@ -87,6 +89,20 @@ body {
 
 	.tt-hint {
 		color: rgba(0, 0, 0, 0.4) !important;
+	}
+
+	.view {
+		position: absolute;
+		width: 100%;
+		bottom: 39px;
+		right: -195px;
+		text-align: center;
+		z-index: 19;
+
+		i {
+			cursor: pointer;
+			font-size: 30px;
+		}
 	}
 }
 
@@ -102,6 +118,7 @@ body {
 	}
 }
 
+.boss-mini,
 .boss {
 	background-color: @segment-color !important;
 
@@ -172,6 +189,21 @@ body {
 				}
 			}
 		}
+	}
+}
+
+.boss-mini {
+	width: 19.5%;
+	height: 310px;
+	display: inline-block;
+	vertical-align: bottom;
+
+	& .panel {
+		width: 100% !important;
+	}
+
+	&.segment:last-child {
+		margin-bottom: 1em;
 	}
 }
 
