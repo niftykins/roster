@@ -75,18 +75,25 @@ Meteor.methods({
 		console.log("Remove Player: ", player);
 	},
 
-	addToBoss: function(boss, name) {
-		check(boss, String);
+	addToBoss: function(bossName, name) {
+		check(bossName, String);
 		check(name, String);
 
 		checkUser();
 
 		var player = Players.findOne({name:name});
+		var role = player.role;
+
+		var boss = Bosses.findOne({name:bossName});
+
+		// hack around spots.melee vs spots.plural
+		if (boss.spots[(role==='melee'?role:role+'s')] <= boss[role+'s'].length)
+			throw new Meteor.Error(403, "No room for poor old " + name);
 
 		var update = {};
 		update[player.role+'s'] = player._id;
 
-		Bosses.update({name:boss}, {$addToSet:update});
+		Bosses.update({name:bossName}, {$addToSet:update});
 	},
 
 	removeFromBoss: function(boss, name) {

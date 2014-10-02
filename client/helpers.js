@@ -142,8 +142,6 @@ Template.player.events({
 		if(isAdmin()) {
 			var call = $t.hasClass('out') ? 'addToBoss' : 'removeFromBoss';
 
-			$t.toggleClass('out');
-
 			var player = $t.attr('name');
 			var boss = $t.parents('.boss').attr('name');
 
