@@ -109,19 +109,25 @@ Template.search.helpers({
 	}
 });
 
+var setFilter = function(value) {
+	Session.set('filter', value);
+
+	if (value === '')
+		Session.set('view', false);
+};
 Template.search.events({
 	'blur .filter input': function(e) {
-		Session.set('filter', $(e.target).val().toLowerCase());
+		setFilter($(e.target).val().toLowerCase());
 	},
 
 	'keypress .filter input': function(e) {
 		if(e.which === 13) {
-			Session.set('filter', $(e.target).val().toLowerCase());
-		} 
+			setFilter($(e.target).val().toLowerCase());		} 
 	},
 
 	'click .close': function(e) {
 		Session.set('filter', null);
+		Session.set('view', false);
 	},
 
 	'click .view i': function(e) {
