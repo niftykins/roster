@@ -89,7 +89,11 @@
 				{{#if gridView}}
 					{{> boss_mini}}
 				{{else}}
-					{{> boss}}
+					{{#if isAdmin}}
+						{{> boss_admin}}
+					{{else}}
+						{{> boss}}
+					{{/if}}
 				{{/if}}
 			{{/each}}
 		{{else}}
@@ -140,8 +144,8 @@
 	</div>
 </template>
 
-<template name="boss">
-	<div name="{{name}}" class="ui segment boss grid">
+<template name="boss_admin">
+	<div name="{{name}}" class="ui segment boss grid admin">
 		<div class="panel column">
 			<img class="ui image" src="/{{name}}.png">
 			<h2>{{name}}</h2>
@@ -149,36 +153,112 @@
 				<h3>{{playerCount}}</h3>
 			{{/if}}
 
-			{{#if isAdmin}}
-				<div name="{{name}}">
-					<div name="melee" class="spot">
-						<img src="/melee2.png">
-						<i class="triangle large up icon"></i>
-						<span>{{spots.melee}}</span>
-						<i class="triangle large down icon"></i>
-					</div>
+			<div name="{{name}}">
+				<div name="melee" class="spot">
+					<img src="/melee2.png">
+					<i class="triangle large up icon"></i>
+					<span>{{spots.melee}}</span>
+					<i class="triangle large down icon"></i>
+				</div>
 
-					<div name="casters" class="spot">
-						<img src="/caster2.png">
-						<i class="triangle large up icon"></i>
-						<span>{{spots.casters}}</span>
-						<i class="triangle large down icon"></i>
-					</div>
+				<div name="casters" class="spot">
+					<img src="/caster2.png">
+					<i class="triangle large up icon"></i>
+					<span>{{spots.casters}}</span>
+					<i class="triangle large down icon"></i>
+				</div>
 
-					<div name="healers" class="spot">
-						<img src="/healer2.png">
-						<i class="triangle large up icon"></i>
-						<span>{{spots.healers}}</span>
-						<i class="triangle large down icon"></i>
-					</div>
+				<div name="healers" class="spot">
+					<img src="/healer2.png">
+					<i class="triangle large up icon"></i>
+					<span>{{spots.healers}}</span>
+					<i class="triangle large down icon"></i>
+				</div>
 
-					<div name="tanks" class="spot">
-						<img src="/tank2.png">
-						<i class="triangle large up icon"></i>
-						<span>{{spots.tanks}}</span>
-						<i class="triangle large down icon"></i>
+				<div name="tanks" class="spot">
+					<img src="/tank2.png">
+					<i class="triangle large up icon"></i>
+					<span>{{spots.tanks}}</span>
+					<i class="triangle large down icon"></i>
+				</div>
+			</div>
+		</div>
+
+		<div class="slots column">
+			{{#if melees.length}}
+				<div class="role">
+					<img class="ui left floated image" src="/melee2.png">
+					<div class="melee row">
+						{{#each melees}}
+							{{> player}}
+						{{/each}}
+					</div>
+					<div class="subs row">
+						{{#each subs "melees"}}
+							{{> sub}}
+						{{/each}}
 					</div>
 				</div>
+			{{/if}}
+
+			{{#if casters.length}}
+				<div class="role">
+					<img class="ui left floated image" src="/caster2.png">
+					<div class="casters row">
+						{{#each casters}}
+							{{> player}}
+						{{/each}}
+					</div>
+					<div class="subs row">
+						{{#each subs "casters"}}
+							{{> sub}}
+						{{/each}}
+					</div>
+				</div>
+			{{/if}}
+
+			{{#if healers.length}}
+				<div class="role">
+					<img class="ui left floated image" src="/healer2.png">
+					<div class="healers row">
+						{{#each healers}}
+							{{> player}}
+						{{/each}}
+					</div>
+					<div class="subs row">
+						{{#each subs "healers"}}
+							{{> sub}}
+						{{/each}}
+					</div>
+				</div>
+			{{/if}}
+
+			{{#if tanks.length}}
+				<div class="role">
+					<img class="ui left floated image" src="/tank2.png">
+					<div class="tanks row">
+						{{#each tanks}}
+							{{> player}}
+						{{/each}}
+					</div>
+					<div class="subs row">
+						{{#each subs "tanks"}}
+							{{> sub}}
+						{{/each}}
+					</div>
+				</div>
+			{{/if}}
+		</div>
+	</div>
+</template>
+
+<template name="boss">
+	<div name="{{name}}" class="ui segment boss grid">
+		<div class="panel column">
+			<img class="ui image" src="/{{name}}.png">
+			<h2>{{name}}</h2>
+			{{#if playerCount}}
+				<h3>{{playerCount}}</h3>
 			{{/if}}
 		</div>
 
@@ -224,6 +304,12 @@
 
 <template name="player">
 	<div name="{{name}}" class="no-select player {{class}} {{#if out}}out{{/if}}">
+		{{name}}
+	</div>
+</template>
+
+<template name="sub">
+	<div name="{{name}}" class="no-select player sub {{change}}">
 		{{name}}
 	</div>
 </template>

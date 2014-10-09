@@ -138,7 +138,7 @@ Template.search.events({
 	}
 });
 
-Template.boss.events({
+Template.boss_admin.events({
 	'click .spot > i': function(e) {
 		var $t = $(e.target);
 
@@ -149,6 +149,37 @@ Template.boss.events({
 		Meteor.call('changeSpot', value, spot, boss, function(error) {
 			if(error) console.log(error);
 		});
+	}
+});
+
+Template.boss_admin.helpers({
+	'subs': function(role) {
+		if (this.number > 5) return; // remove
+
+		var current = this[role];
+		var previousBoss = Bosses.findOne({number: this.number-1});
+		var previous = previousBoss ? previousBoss[role] : [];
+
+		var changes = [];
+
+		current.forEach(function(c) {
+			// if they're out for this, but they were in last time >> remove
+			if ( c.out && _.contains(previous, c._id)) {
+				c.change = 'remove';
+				changes.push(c);
+			}
+
+			// if they're in for this, but weren't in for last time >> add
+			else if ( ! c.out && ! _.contains(previous, c._id)) {
+				c.change = 'add';
+				changes.push(c);
+			}
+
+			// if they're still in from last time >> no change
+			// if they're still out from last time >> no change
+		});
+
+		return changes;
 	}
 });
 

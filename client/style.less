@@ -1,6 +1,9 @@
 @segment-color: #D1D1D1;
 @bg-color: #E4E4E4;
 
+@add-color: #5BBD72;
+@remove-color: #D95C5C;
+
 @dk-color: #C41F3B;
 @paladin-color: #F58CBA;
 @priest-color: #FFFFFF;
@@ -192,11 +195,35 @@ body {
 	}
 }
 
+.boss.admin {
+	.slots {
+		//width: 55% !important;
+		.melee, .casters, .healers, .tanks {
+			width: 50%;
+		}
+
+		.subs {
+			width: 40%;
+			float: right;
+
+			.player {
+				cursor: auto;
+			}
+		}
+
+		.row {
+			display: inline-block;
+			margin-left: 15px;
+		}
+	}
+}
+
 .boss-mini {
 	width: 19.5%;
 	height: 310px;
 	display: inline-block;
 	vertical-align: bottom;
+
 
 	& .panel {
 		width: 100% !important;
@@ -348,6 +375,13 @@ body {
 }
 
 // CLASS COLORS
+
+.sub.add {
+	.classColor(@add-color);
+}
+.sub.remove {
+	.classColor(@remove-color);
+}
 
 .rogue {
 	.classColor(@rogue-color);

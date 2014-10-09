@@ -88,7 +88,7 @@ Meteor.methods({
 
 		// hack around spots.melee vs spots.plural
 		if (boss.spots[(role==='melee'?role:role+'s')] <= boss[role+'s'].length)
-			throw new Meteor.Error(403, "No room for poor old " + name);
+			return;
 
 		var update = {};
 		update[player.role+'s'] = player._id;
