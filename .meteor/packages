@@ -1,0 +1,19 @@
+# Meteor packages used by this project, one per line.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-platform
+iron:router
+sacha:spin
+nooitaf:semantic-ui-less
+arunoda:find-faster
+meteorhacks:fast-render
+less
+underscore
+accounts-ui
+accounts-password
+jquery
+meteorhacks:kadira
+sergeyt:typeahead
+

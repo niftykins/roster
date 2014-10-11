@@ -154,7 +154,11 @@ Template.boss_admin.events({
 
 Template.boss_admin.helpers({
 	'subs': function(role) {
-		if (this.number > 5) return; // remove
+		var sort = function(a,b) {
+			if(a.change !== b.change) return (a.change < b.change) ? -1 : 1;
+			if(a.class !== b.class) return (a.class > b.class) ? -1 : 1;
+			return (a.name < b.name) ? -1 : 1;
+		};
 
 		var current = this[role];
 		var previousBoss = Bosses.findOne({number: this.number-1});
@@ -178,6 +182,8 @@ Template.boss_admin.helpers({
 			// if they're still in from last time >> no change
 			// if they're still out from last time >> no change
 		});
+
+		changes.sort(sort);
 
 		return changes;
 	}

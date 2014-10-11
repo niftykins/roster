@@ -167,10 +167,6 @@ body {
 			margin-left: 60px;
 			font-size: 0;
 
-			&:last-child {
-				margin-bottom: 0;
-			}
-
 			.player {
 				cursor: pointer;
 				width: 104px;
@@ -197,6 +193,10 @@ body {
 
 .boss.admin {
 	.slots {
+		.role {
+			overflow: hidden;
+		}
+
 		//width: 55% !important;
 		.melee, .casters, .healers, .tanks {
 			width: 50%;
