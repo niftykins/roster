@@ -52,19 +52,23 @@ Bosses.find().fetch().forEach(function(boss) {
 }); */
 
 if(Bosses.find().count() === 0) {
-	Bosses.insert(makeBoss('Immerseus'));
-	Bosses.insert(makeBoss('The Fallen Protectors'));
-	Bosses.insert(makeBoss('Norushen'));
-	Bosses.insert(makeBoss('Sha of Pride'));
-	Bosses.insert(makeBoss('Galakras'));
-	Bosses.insert(makeBoss('Iron Juggernaut'));
-	Bosses.insert(makeBoss('Kor\'kron Dark Shaman'));
-	Bosses.insert(makeBoss('General Nazgrim'));
-	Bosses.insert(makeBoss('Malkorok'));
-	Bosses.insert(makeBoss('Spoils of Pandaria'));
-	Bosses.insert(makeBoss('Thok the Nocthirsty'));
-	Bosses.insert(makeBoss('Siegecrafter Blackfuse'));
-	Bosses.insert(makeBoss('Paragons of the Klaxxi'));
-	Bosses.insert(makeBoss('Garrosh Hellscream'));
+	Bosses.insert(makeBoss('Kargath Bladefist'));
+	Bosses.insert(makeBoss('The Butcher'));
+	Bosses.insert(makeBoss('Tectus'));
+	Bosses.insert(makeBoss('Brackenspore'));
+	Bosses.insert(makeBoss('Twin Ogron'));
+	Bosses.insert(makeBoss('Ko\'ragh'));
+	Bosses.insert(makeBoss('Imperator Mar\'gok'));
+
+	Bosses.insert(makeBoss('Beastlord Darmac'));
+	Bosses.insert(makeBoss('Flamebender Ka\'graz'));
+	Bosses.insert(makeBoss('Gruul the Subjugated'));
+	Bosses.insert(makeBoss('The Blast Furnace'));
+	Bosses.insert(makeBoss('Hans\'gar and Franzok'));
+	Bosses.insert(makeBoss('Iron Maidens'));
+	Bosses.insert(makeBoss('Kromog'));
+	Bosses.insert(makeBoss('Operator Thogar'));
+	Bosses.insert(makeBoss('Oregorger'));
+	Bosses.insert(makeBoss('Warlord Blackhand'));
 }
 
