@@ -95,6 +95,10 @@ Template.login.events({
 	}
 });
 
+Template.instance_menu.rendered = function(e) {
+	Session.setDefault('instance', Instances.findOne({}, {sort: {number: -1}}).name);
+};
+
 Template.instance_menu.helpers({
 	'instances': function() {
 		return Instances.find({}, {sort: {number: -1}}).fetch();

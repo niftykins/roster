@@ -21,7 +21,7 @@ Meteor.publish('userData', function() {
 Meteor.users.update({ username: 'nifty' }, {$set: { admin: true } });
 Meteor.users.update({ username: 'officer' }, {$set: { admin: true } });
 
-function makeBoss(name, instance) {
+function makeBoss(name, instance, number) {
 	return {
 		name: name,
 		instance: instance,
