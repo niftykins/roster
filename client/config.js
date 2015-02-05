@@ -1,7 +1,7 @@
 Meteor.startup(function() {
 	Accounts.ui.config({
 		passwordSignupFields: "USERNAME_ONLY",
-	}); 
+	});
 
 	Meteor.Spinner.options = {
 		lines: 7,

@@ -122,7 +122,8 @@ Template.search.events({
 
 	'keypress .filter input': function(e) {
 		if(e.which === 13) {
-			setFilter($(e.target).val().toLowerCase());		} 
+			setFilter($(e.target).val().toLowerCase());
+		}
 	},
 
 	'click .close': function(e) {

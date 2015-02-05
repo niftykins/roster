@@ -71,4 +71,3 @@ if(Bosses.find().count() === 0) {
 	Bosses.insert(makeBoss('Oregorger'));
 	Bosses.insert(makeBoss('Warlord Blackhand'));
 }
-
