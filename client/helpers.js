@@ -95,6 +95,23 @@ Template.login.events({
 	}
 });
 
+Template.instance_menu.helpers({
+	'instances': function() {
+		return Instances.find({}, {sort: {number: -1}}).fetch();
+	},
+
+	'lastBoss': function() {
+		return Bosses.findOne({instance: this.name}, {sort: {number: -1}}).name;
+	}
+});
+
+Template.instance_menu.events({
+	'click .instance': function(e) {
+		e.stopPropagation();
+		Session.set('instance', this.name);
+	}
+});
+
 Template.search.rendered = function() {
 	Meteor.typeahead(this.find('input'));
 };

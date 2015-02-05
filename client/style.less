@@ -271,6 +271,31 @@ body {
 	}
 }
 
+.instance.menu {
+	position: absolute;
+	left: 0;
+
+	.instance {
+		cursor: pointer;
+		width: 75px;
+		height: 75px;
+		background-color: #d1d1d1;
+		margin-bottom: 7px;
+		border-bottom-right-radius: 0.5em;
+		border-top-right-radius: 0.5em;
+
+		&:hover {
+			background-color: darken(#d1d1d1, 10%);
+		}
+
+		img {
+			width: 60px;
+			height: 60px;
+			margin: 7.5px;
+		}
+	}
+}
+
 // SUBMIT FORMS
 
 .remove.form,

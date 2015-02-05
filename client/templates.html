@@ -5,6 +5,7 @@
 <template name="layout">
 	<div class="ui one column page grid">
 		{{> menu}}
+		{{> instance_menu}}
 		{{> jenn}}
 		{{> yield}}
 	</div>
@@ -68,6 +69,16 @@
 				<i class="bigger green sign in icon" ></i>
 			</a>
 		{{/if}}
+	</div>
+</template>
+
+<template name="instance_menu">
+	<div class="instance menu">
+		{{#each instances}}
+			<div class="instance">
+				<img src="http://images.niftykins.com/roster/{{lastBoss}}.png" />
+			</div>
+		{{/each}}
 	</div>
 </template>
 
