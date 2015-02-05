@@ -50,6 +50,12 @@ Meteor.methods({
 			class: data.class
 		};
 
+		var existing = Players.findOne({name: player.name});
+
+		if (!!existing) {
+			throw new Meteor.Error(302, 'Player already exists.');
+		}
+
 		Players.insert(player);
 		console.log("New Player: ", player);
 	},
