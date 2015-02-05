@@ -2,6 +2,10 @@ Meteor.publish('bosses', function() {
 	return Bosses.find();
 });
 
+Meteor.publish('instances', function() {
+	return Instances.find();
+});
+
 Meteor.publish('players', function() {
 	return Players.find();
 });
@@ -17,16 +21,15 @@ Meteor.publish('userData', function() {
 Meteor.users.update({ username: 'nifty' }, {$set: { admin: true } });
 Meteor.users.update({ username: 'officer' }, {$set: { admin: true } });
 
-var count = 0;
-function makeBoss(name) {
-	count++;
+function makeBoss(name, instance) {
 	return {
 		name: name,
+		instance: instance,
 		casters: [],
 		melees: [],
 		healers: [],
 		tanks: [],
-		number: count,
+		number: number,
 		spots: {
 			melee: 0,
 			casters: 0,
@@ -36,38 +39,43 @@ function makeBoss(name) {
 	};
 }
 
-/*
-Bosses.find().fetch().forEach(function(boss) {
-	['melees', 'casters', 'healers', 'tanks'].forEach(function(role) {
-		boss[role].forEach(function(playerID) {
-			var player = Players.findOneFaster(playerID);
+var instanceCount = 0;
+function setupInstance(name, bosses) {
+	Instances.upsert({name: name}, {$set: {
+		name: name,
+		number: instanceCount
+	}});
+	instanceCount++;
 
-			if(!player) {
-				var update = {};
-				update[role] = playerID;
-				Bosses.update(boss._id, {$pull:update});
-			}
+	if (Bosses.find({instance: name}).count() !== bosses.length) {
+		Bosses.remove({instance: name});
+
+		bosses.forEach(function(boss, i) {
+			console.log('Adding %s to %s', boss, name);
+			Bosses.insert(makeBoss(boss, name, i));
 		});
-	});
-}); */
-
-if(Bosses.find().count() === 0) {
-	Bosses.insert(makeBoss('Kargath Bladefist'));
-	Bosses.insert(makeBoss('The Butcher'));
-	Bosses.insert(makeBoss('Tectus'));
-	Bosses.insert(makeBoss('Brackenspore'));
-	Bosses.insert(makeBoss('Twin Ogron'));
-	Bosses.insert(makeBoss('Ko\'ragh'));
-	Bosses.insert(makeBoss('Imperator Mar\'gok'));
-
-	Bosses.insert(makeBoss('Beastlord Darmac'));
-	Bosses.insert(makeBoss('Flamebender Ka\'graz'));
-	Bosses.insert(makeBoss('Gruul the Subjugated'));
-	Bosses.insert(makeBoss('The Blast Furnace'));
-	Bosses.insert(makeBoss('Hans\'gar and Franzok'));
-	Bosses.insert(makeBoss('Iron Maidens'));
-	Bosses.insert(makeBoss('Kromog'));
-	Bosses.insert(makeBoss('Operator Thogar'));
-	Bosses.insert(makeBoss('Oregorger'));
-	Bosses.insert(makeBoss('Warlord Blackhand'));
+	}
 }
+
+setupInstance('highmaul', [
+	'Kargath Bladefist',
+	'The Butcher',
+	'Tectus',
+	'Brackenspore',
+	'Twin Ogron',
+	'Ko\'ragh',
+	'Imperator Mar\'gok'
+]);
+
+setupInstance('blackrock foundry', [
+	'Beastlord Darmac',
+	'Flamebender Ka\'graz',
+	'Gruul the Subjugated',
+	'The Blast Furnace',
+	'Hans\'gar and Franzok',
+	'Iron Maidens',
+	'Kromog',
+	'Operator Thogar',
+	'Oregorger',
+	'Warlord Blackhand'
+]);

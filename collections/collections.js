@@ -1,5 +1,6 @@
 Players = new Meteor.Collection('players');
 Bosses = new Meteor.Collection('bosses');
+Instances = new Meteor.Collection('instances');
 
 isAdmin = function(user) {
 	user = user || Meteor.user();
