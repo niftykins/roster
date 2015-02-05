@@ -267,6 +267,16 @@ Template.add.events({
 	}
 });
 
+Template.remove.rendered = function() {
+	Meteor.typeahead(this.find('input'));
+};
+
+Template.remove.helpers({
+	'names': function() {
+		return Players.find().fetch().map(function(e) { return e.name; });
+	}
+});
+
 Template.remove.events({
 	'submit form': function(e) {
 		e.preventDefault();
