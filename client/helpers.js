@@ -106,6 +106,10 @@ Template.instance_menu.helpers({
 
 	'lastBoss': function() {
 		return Bosses.findOne({instance: this.name}, {sort: {number: -1}}).name;
+	},
+
+	'isActive': function() {
+		return Session.get('instance') === this.name ? 'active' : '';
 	}
 });
 
