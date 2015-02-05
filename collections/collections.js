@@ -65,6 +65,8 @@ Meteor.methods({
 
 		var player = Players.findOne({name:name});
 
+		if (!player) return;
+
 		Players.remove(player._id);
 
 		var update = {};
