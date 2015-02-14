@@ -96,7 +96,8 @@ Template.login.events({
 });
 
 Template.instance_menu.rendered = function(e) {
-	Session.setDefault('instance', Instances.findOne({}, {sort: {number: -1}}).name);
+	var instance = Instances.findOne({}, {sort: {number: -1}});
+	if (instance) Session.setDefault('instance', instance.name);
 };
 
 Template.instance_menu.helpers({
@@ -105,7 +106,8 @@ Template.instance_menu.helpers({
 	},
 
 	'lastBoss': function() {
-		return Bosses.findOne({instance: this.name}, {sort: {number: -1}}).name;
+		var boss = Bosses.findOne({instance: this.name}, {sort: {number: -1}});
+		if (boss) return boss.name;
 	},
 
 	'isActive': function() {
