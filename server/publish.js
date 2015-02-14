@@ -11,15 +11,50 @@ Meteor.publish('players', function() {
 });
 
 Meteor.publish('userData', function() {
-	return Meteor.users.find({
+	var user = Meteor.users.find({
 		_id: this.userId
 	}, {
 		fields: { admin: 1 }
 	});
+
+	return user;
 });
 
 Meteor.users.update({ username: 'nifty' }, {$set: { admin: true } });
 Meteor.users.update({ username: 'officer' }, {$set: { admin: true } });
+
+
+var crypto = Npm.require('crypto');
+var FancySupportSignatureGenerator = function(cid) {
+	var secret = Meteor.settings && Meteor.settings.fancysupport && Meteor.settings.fancysupport.secret;
+	if (secret) return crypto.createHash('sha1').update(cid + secret).digest('hex');
+};
+
+Meteor.methods({
+	fancysupport_data: function() {
+		var user = Meteor.user();
+
+		if ( ! user) throw new Meteor.Error(401, 'You need to be logged in.');
+
+		var opts = {
+			activator: '#fancy-activator',
+			unread_counter: '#fancy-unread',
+			log_errors: true,
+
+			signature: FancySupportSignatureGenerator(user._id),
+			app_key: Meteor.settings.fancysupport.app_key,
+
+			customer_id: user._id,
+			name: user.username,
+			custom_data: {
+				admin: user.admin
+			}
+		};
+
+		return opts;
+	}
+});
+
 
 function makeBoss(name, instance, number) {
 	return {

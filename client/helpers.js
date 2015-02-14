@@ -173,7 +173,16 @@ Template.boss_admin.events({
 		var boss = $t.parent().parent().attr('name');
 
 		Meteor.call('changeSpot', value, spot, boss, function(error) {
-			if(error) console.log(error);
+			if(error) return console.log(error);
+
+			FancySupport.event({
+				name: 'change_spot',
+				data: {
+					value: value,
+					role: spot,
+					boss: boss
+				}
+			});
 		});
 	}
 });
@@ -226,7 +235,15 @@ Template.player.events({
 			var boss = $t.parents('.boss').attr('name');
 
 			Meteor.call(call, boss, player, function(error) {
-				if(error) console.log(error);
+				if(error) return console.log(error);
+
+				FancySupport.event({
+					name: call.toLowerCase(),
+					data: {
+						player: player,
+						boss: boss
+					}
+				});
 			});
 		} else {
 			Session.set('filter', $t.attr('name'));
@@ -284,10 +301,18 @@ Template.add.events({
 		};
 
 		Meteor.call('addPlayer', player, function(error) {
-			if(error)
-				FormErrors.show(e.target, error.error, error.reason);
-			else
-				Router.go('roster');
+			if(error) return FormErrors.show(e.target, error.error, error.reason);
+
+			FancySupport.event({
+				name: 'create_player',
+				data: {
+					name: player.name,
+					role: player.role,
+					class: player.class
+				}
+			});
+
+			Router.go('roster');
 		});
 	}
 });
@@ -316,10 +341,16 @@ Template.remove.events({
 		}
 
 		Meteor.call('removePlayer', name, function(error) {
-			if(error)
-				FormErrors.show(e.target, error.error, error.reason);
-			else
-				Router.go('roster');
+			if(error) return FormErrors.show(e.target, error.error, error.reason);
+
+			FancySupport.event({
+				name: 'delete_player',
+				data: {
+					name: name,
+				}
+			});
+
+			Router.go('roster');
 		});
 	}
 });

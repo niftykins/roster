@@ -15,4 +15,23 @@ Meteor.startup(function() {
 		speed: 1,
 		trail: 67
 	};
+
+	var initted = false;
+	Tracker.autorun(function() {
+		if ( ! Session.get('FancySupportLoaded')) return;
+
+		if (Meteor.user()) {
+			Meteor.call('fancysupport_data', function(err, data) {
+				if (err) return console.error(err);
+
+				if ( ! initted) {
+					FancySupport.init(data);
+					initted = true;
+				}
+			});
+		}
+		else {
+			FancySupport.clear();
+		}
+	});
 });
