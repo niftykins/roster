@@ -198,7 +198,7 @@ Template.boss_admin.helpers({
 		};
 
 		var current = this[role];
-		var previousBoss = Bosses.findOne({number: this.number-1});
+		var previousBoss = Bosses.findOne({number: this.number-1, instance: this.instance});
 		var previous = previousBoss ? previousBoss[role] : [];
 
 		var changes = [];
