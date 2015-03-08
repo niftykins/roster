@@ -1,0 +1,25 @@
+<template name="roster">
+	{{> search}}
+
+	<div class="bosses">
+		{{#if this.length}}
+			{{#each this}}
+				{{#if gridView}}
+					{{> boss_mini}}
+				{{else}}
+					{{#if isAdmin}}
+						{{> boss_admin}}
+					{{else}}
+						{{> boss}}
+					{{/if}}
+				{{/if}}
+			{{/each}}
+		{{else}}
+			{{#if getFilter}}
+				<p class="notfound">{{getFilter}} is not currently in for any bosses</p>
+			{{else}}
+				{{> spinner}}
+			{{/if}}
+		{{/if}}
+	</div>
+</template>

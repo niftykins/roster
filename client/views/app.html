@@ -1,0 +1,30 @@
+<head>
+	<title>Delvex is a Noob</title>
+</head>
+
+<template name="layout">
+	<div class="ui one column page grid">
+		{{> menu}}
+		{{> instance_menu}}
+		{{> jenn}}
+		{{> yield}}
+	</div>
+</template>
+
+<template name="batman">
+	{{> loginButtons}}
+</template>
+
+<template name="loading">
+	{{> spinner}}
+</template>
+
+<template name="instance_menu">
+	<div class="instance menu">
+		{{#each instances}}
+			<div class="instance {{isActive}}">
+				<img src="http://images.niftykins.com/roster/{{lastBoss}}.png" />
+			</div>
+		{{/each}}
+	</div>
+</template>

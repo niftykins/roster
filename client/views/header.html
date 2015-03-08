@@ -1,0 +1,59 @@
+<template name="menu">
+	<div class="menu buttons">
+		{{#if user}}
+			<a href="/logout">
+				<i class="bigger red sign out icon"></i>
+			</a>
+			{{#if isAdmin}}
+				<a href="{{pathFor 'add'}}">
+					<i class="bigger black add icon"></i>
+				</a>
+				<a href="{{pathFor 'remove'}}">
+					<i class="bigger black minus icon"></i>
+				</a>
+			{{/if}}
+		{{else}}
+			<a href="/login">
+				<i class="bigger green sign in icon" ></i>
+			</a>
+		{{/if}}
+	</div>
+</template>
+
+<template name="jenn">
+	<div class="jenn">
+		<a href="http://biscomic.com" target="_blank">
+			<i class="big magic icon"></i>
+			<span>biscomic.com</span>
+		</a>
+	</div>
+</template>
+
+<template name="search">
+	<div class="filter">
+		<div class="ui huge icon input">
+			<input class="typeahead" type="text" placeholder="Search..." value="{{getFilter}}" data-source="names" data-hint="true">
+			{{#if getFilter}}
+				<i class="close icon" style="cursor: pointer;"></i>
+			{{else}}
+				<i class="search icon"></i>
+			{{/if}}
+		</div>
+
+		{{#if getFilter}}
+			<div class="view">
+				{{#if gridView}}
+					<i class="reorder icon"></i>
+				{{else}}
+					<i class="block layout icon"></i>
+				{{/if}}
+			</div>
+
+			{{#if countBosses}}
+				<div class="counter">
+					{{getFilter}} is in for {{pluralize countBosses 'boss'}}
+				</div>
+			{{/if}}
+		{{/if}}
+	</div>
+</template>

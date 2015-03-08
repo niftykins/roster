@@ -1,0 +1,69 @@
+<template name="add">
+	<div class="player form">
+		<form id="submit-player" class="ui form segment">
+			<div class="ui error message">
+				<i class="close icon"></i>
+				<div class="header"></div>
+				<p class="message"></p>
+			</div>
+
+			<div class="field">
+				<div class="ui huge icon input">
+					<input type="text" name="name" placeholder="name">
+					<i class="user icon"></i>
+				</div>
+			</div>
+
+			<div class="field">
+				<div class="ui input">
+					<input type="hidden" name="role">
+					<div class="roles">
+						<div class="row">
+							<div value="caster" class="role caster">
+								<img src="/caster2.png">
+							</div>
+							<div value="melee" class="role melee">
+								<img src="/melee2.png">
+							</div>
+							<div value="healer" class="role healer">
+								<img src="/healer2.png">
+							</div>
+							<div value="tank" class="role tank">
+								<img src="/tank2.png">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="field">
+				<div class="ui input">
+					<input type="hidden" name="class">
+					<div class="classes">
+						<div class="row">
+							<div value="rogue" class="class rogue"></div>
+							<div value="warrior" class="class warrior"></div>
+							<div value="druid" class="class druid"></div>
+							<div value="dk" class="class dk"></div>
+						</div>
+
+						<div class="row">
+							<div value="paladin" class="class paladin"></div>
+							<div value="priest" class="class priest"></div>
+							<div value="warlock" class="class warlock"></div>
+							<div value="shaman" class="class shaman"></div>
+						</div>
+
+						<div class="row">
+							<div value="mage" class="class mage"></div>
+							<div value="monk" class="class monk"></div>
+							<div value="hunter" class="class hunter"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<button class="ui huge fluid black button" type="submit">Add Player</button>
+		</form>
+	</div>
+</template>
