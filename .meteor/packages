@@ -6,10 +6,8 @@
 meteor-platform
 iron:router
 sacha:spin
-nooitaf:semantic-ui-less
 arunoda:find-faster
 meteorhacks:fast-render
-less
 underscore
 accounts-ui
 accounts-password
@@ -18,3 +16,5 @@ meteorhacks:kadira
 sergeyt:typeahead
 
 nifty:fancysupport
+nooitaf:semantic-ui@0.19.3
+stylus
