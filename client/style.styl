@@ -141,9 +141,12 @@ body
 	.slots
 		width 79% !important
 
+		.role
+			overflow hidden
+
 		.row
 			margin-bottom 15px
-			margin-left 60px
+			margin-left 65px
 			font-size 0
 
 			.player
@@ -166,23 +169,19 @@ body
 
 .boss.admin
 	.slots
-		.role
-			overflow hidden
+		.players, .subs
+			display inline-block
+			vertical-align top
 
-		//width 55% !important
-		.melee, .casters, .healers, .tanks
+		.players
 			width 50%
 
 		.subs
-			width 40%
-			float right
+			width 45%
+			margin-left 20px
 
 			.player
 				cursor auto
-
-		.row
-			display inline-block
-			margin-left 15px
 
 .boss-mini
 	width 19.5%

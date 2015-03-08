@@ -49,15 +49,17 @@
 			{{#if melees.length}}
 				<div class="role">
 					<img class="ui left floated image" src="/melee2.png">
-					<div class="melee row">
-						{{#each melees}}
-							{{> player}}
-						{{/each}}
-					</div>
-					<div class="subs row">
-						{{#each subs "melees"}}
-							{{> sub}}
-						{{/each}}
+					<div class="row">
+						<div class="melee players">
+							{{#each melees}}
+								{{> player}}
+							{{/each}}
+						</div>
+						<div class="subs">
+							{{#each subs "melees"}}
+								{{> sub}}
+							{{/each}}
+						</div>
 					</div>
 				</div>
 			{{/if}}
@@ -65,31 +67,35 @@
 			{{#if casters.length}}
 				<div class="role">
 					<img class="ui left floated image" src="/caster2.png">
-					<div class="casters row">
-						{{#each casters}}
-							{{> player}}
-						{{/each}}
-					</div>
-					<div class="subs row">
-						{{#each subs "casters"}}
-							{{> sub}}
-						{{/each}}
+					<div class="row">
+						<div class="casters players">
+							{{#each casters}}
+								{{> player}}
+							{{/each}}
+						</div>
+						<div class="subs">
+							{{#each subs "casters"}}
+								{{> sub}}
+							{{/each}}
+						</div>
 					</div>
 				</div>
 			{{/if}}
 
 			{{#if healers.length}}
 				<div class="role">
-					<img class="ui left floated image" src="/healer2.png">
-					<div class="healers row">
-						{{#each healers}}
-							{{> player}}
-						{{/each}}
-					</div>
-					<div class="subs row">
-						{{#each subs "healers"}}
-							{{> sub}}
-						{{/each}}
+					<img class="ui image" src="/healer2.png">
+					<div class="row">
+						<div class="healers players">
+							{{#each healers}}
+								{{> player}}
+							{{/each}}
+						</div>
+						<div class="subs">
+							{{#each subs "healers"}}
+								{{> sub}}
+							{{/each}}
+						</div>
 					</div>
 				</div>
 			{{/if}}
@@ -97,15 +103,17 @@
 			{{#if tanks.length}}
 				<div class="role">
 					<img class="ui left floated image" src="/tank2.png">
-					<div class="tanks row">
-						{{#each tanks}}
-							{{> player}}
-						{{/each}}
-					</div>
-					<div class="subs row">
-						{{#each subs "tanks"}}
-							{{> sub}}
-						{{/each}}
+					<div class="row">
+						<div class="tanks players">
+							{{#each tanks}}
+								{{> player}}
+							{{/each}}
+						</div>
+						<div class="subs">
+							{{#each subs "tanks"}}
+								{{> sub}}
+							{{/each}}
+						</div>
 					</div>
 				</div>
 			{{/if}}

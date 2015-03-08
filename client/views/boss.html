@@ -24,39 +24,55 @@
 		</div>
 
 		<div class="slots column">
-			{{#if melees.length}}
-				<img class="ui left floated image" src="/melee2.png">
-				<div class="melee row">
-					{{#each melees}}
-						{{> player}}
-					{{/each}}
+						{{#if melees.length}}
+				<div class="role">
+					<img class="ui left floated image" src="/melee2.png">
+					<div class="row">
+						<div class="melee players">
+							{{#each melees}}
+								{{> player}}
+							{{/each}}
+						</div>
+					</div>
 				</div>
 			{{/if}}
 
 			{{#if casters.length}}
-				<img class="ui left floated image" src="/caster2.png">
-				<div class="casters row">
-					{{#each casters}}
-						{{> player}}
-					{{/each}}
+				<div class="role">
+					<img class="ui left floated image" src="/caster2.png">
+					<div class="row">
+						<div class="casters players">
+							{{#each casters}}
+								{{> player}}
+							{{/each}}
+						</div>
+					</div>
 				</div>
 			{{/if}}
 
 			{{#if healers.length}}
-				<img class="ui left floated image" src="/healer2.png">
-				<div class="healers row">
-					{{#each healers}}
-						{{> player}}
-					{{/each}}
+				<div class="role">
+					<img class="ui image" src="/healer2.png">
+					<div class="row">
+						<div class="healers players">
+							{{#each healers}}
+								{{> player}}
+							{{/each}}
+						</div>
+					</div>
 				</div>
 			{{/if}}
 
 			{{#if tanks.length}}
-				<img class="ui left floated image" src="/tank2.png">
-				<div class="tanks row">
-					{{#each tanks}}
-						{{> player}}
-					{{/each}}
+				<div class="role">
+					<img class="ui left floated image" src="/tank2.png">
+					<div class="row">
+						<div class="tanks players">
+							{{#each tanks}}
+								{{> player}}
+							{{/each}}
+						</div>
+					</div>
 				</div>
 			{{/if}}
 		</div>
