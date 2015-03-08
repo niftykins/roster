@@ -130,5 +130,26 @@ Meteor.methods({
 		update['spots.'+spot] = value;
 
 		Bosses.update({name:boss}, {$inc:update});
+	},
+
+	changeOrder: function(value, boss, instance) {
+		check(value, Match.Integer);
+		check(boss, Match.Integer);
+		check(instance, String);
+
+		checkUser();
+
+		var a = Bosses.findOne({
+			number: boss,
+			instance: instance
+		});
+
+		var b = Bosses.findOne({
+			number: boss+value,
+			instance: instance
+		});
+
+		Bosses.update(a._id, {$inc: {number: value}});
+		Bosses.update(b._id, {$inc: {number: -value}});
 	}
 });

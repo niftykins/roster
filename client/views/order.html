@@ -1,0 +1,30 @@
+<template name="order">
+	<div class="order">
+		{{#each this}}
+			{{> order_boss}}
+		{{/each}}
+	</div>
+</template>
+
+<template name="order_boss">
+	<div name="{{number}}" class="ui segment boss-order">
+		<img class="ui image" src="http://images.niftykins.com/roster/{{name}}.png">
+		<h2>{{name}}</h2>
+
+		<div name="{{name}}" class="spot">
+			{{#if first}}
+				<div class="pad"></div>
+			{{else}}
+				<i class="triangle large up icon"></i>
+			{{/if}}
+
+			<span>{{add number 1}}</span>
+
+			{{#if last}}
+				<div class="pad"></div>
+			{{else}}
+				<i class="triangle large down icon"></i>
+			{{/if}}
+		</div>
+	</div>
+</template>

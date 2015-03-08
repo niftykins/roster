@@ -19,6 +19,12 @@ UI.registerHelper('pluralize', function(n, thing) {
 	else return n + ' ' + thing + 'es';
 });
 
+UI.registerHelper('add', function(value, addition) {
+	value = parseFloat(value);
+	addition = parseFloat(addition);
+	return value + addition;
+});
+
 UI.registerHelper('debug', function() {
 	console.log("vvv=================vvv");
 	console.log(this);
