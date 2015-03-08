@@ -37,8 +37,6 @@ Meteor.methods({
 		if ( ! user) throw new Meteor.Error(401, 'You need to be logged in.');
 
 		var opts = {
-			activator: '#fancy-activator',
-			unread_counter: '#fancy-unread',
 			log_errors: true,
 
 			signature: FancySupportSignatureGenerator(user._id),
