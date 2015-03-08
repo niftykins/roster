@@ -18,12 +18,25 @@ colour-druid = #FF7D0A
 
 // MIXINS
 
+vendor(prop, args)
+	-webkit-{prop} args
+	-moz-{prop} args
+	-ms-{prop} args
+	-o-{prop} args
+	{prop} args
+
+user-select()
+	vendor(user-select, arguments)
+
+transform()
+	vendor(transform, arguments)
+
 classColour(colour)
 	background-color colour
 	border-color colour
 
 
-@import url(http://fonts.googleapis.com/css?family=Lato:400,700)
+@import url("//fonts.googleapis.com/css?family=Lato:400,700")
 
 body
 	font-family 'Lato', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
@@ -31,10 +44,6 @@ body
 	background-color colour-bg
 
 .no-select
-	-moz-user-select -moz-none
-	-khtml-user-select none
-	-webkit-user-select none
-	-o-user-select none
 	user-select none
 
 .show

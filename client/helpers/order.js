@@ -15,7 +15,6 @@ Template.order_boss.events({
 		var $t = $(e.target);
 
 		var value = $t.hasClass('up') ? -1 : 1;
-		var spot = $t.parent().attr('name');
 		var boss = parseInt($t.parent().parent().attr('name'), 10);
 		var instance = Session.get('instance');
 
