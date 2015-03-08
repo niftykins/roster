@@ -1,0 +1,6 @@
+<template name="lootsheet">
+	{{debug}}
+	{{#each this}}
+		<div><a href="http://www.wowhead.com/item={{this.itemID}}" rel="item={{this.itemID}}">{{this.itemID}}: {{this.name}} is a {{this.rarity}} {{this.type}} {{this.subType}} {{this.slot}} from {{this.sourceID}}</a></div>
+	{{/each}}
+</template>

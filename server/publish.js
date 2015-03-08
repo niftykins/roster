@@ -10,6 +10,14 @@ Meteor.publish('players', function() {
 	return Players.find();
 });
 
+Meteor.publish('items', function() {
+	return Items.find();
+});
+
+Meteor.publish('lootsheet', function() {
+	return Lootsheet.find();
+});
+
 Meteor.publish('userData', function() {
 	var user = Meteor.users.find({
 		_id: this.userId
@@ -50,6 +58,48 @@ Meteor.methods({
 		};
 
 		return opts;
+	},
+
+	addItemsToDB: function(items) {
+		check(items, Object);
+
+		checkUser();
+
+		console.log(items);
+
+		var cb = function(sourceID, error, result) {
+			if (error || ! result.data) return;
+
+			var d = result.data;
+
+			var item = {
+				sourceID: sourceID,
+				itemID: parseInt(d.id, 10),
+				name: d.name,
+				icon: d.icon,
+				bonusStats: d.bonusStats,
+				itemSpells: d.itemSpells,
+				itemClass: d.itemClass,
+				itemSubClass: d.itemSubClass,
+				quality: d.quality,
+				inventoryType: d.inventoryType
+			};
+
+			item.rarity = WOW.quality[item.quality];
+			item.type = WOW.itemClass[item.itemClass].name;
+			item.subType = WOW.itemClass[item.itemClass].itemSubClass[item.itemSubClass];
+			item.slot = WOW.inventoryType[item.inventoryType];
+
+			console.log("%d: %s, %s %s %s, from %d", item.itemID, item.name, item.rarity, item.type, item.slot, item.sourceID);
+
+			Items.upsert({itemID: item.itemID}, item);
+		};
+
+		Object.keys(items).forEach(function(boss) {
+			items[boss].forEach(function(itemID) {
+				HTTP.get('https://us.battle.net/api/wow/item/' + itemID + '/raid-heroic', cb.bind(null, boss));
+			});
+		});
 	}
 });
 

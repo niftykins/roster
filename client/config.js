@@ -16,6 +16,8 @@ Meteor.startup(function() {
 		trail: 67
 	};
 
+	window.wowhead_tooltips = {hide: {sellprice: true, dropchance: true}};
+
 	var initted = false;
 	Tracker.autorun(function() {
 		if ( ! Session.get('FancySupportLoaded')) return;

@@ -1,6 +1,8 @@
 Players = new Meteor.Collection('players');
 Bosses = new Meteor.Collection('bosses');
 Instances = new Meteor.Collection('instances');
+Items = new Meteor.Collection('items');
+Lootsheet = new Meteor.Collection('lootsheet');
 
 isAdmin = function(user) {
 	user = user || Meteor.user();
@@ -10,7 +12,7 @@ isAdmin = function(user) {
 		return false;
 };
 
-var checkUser = function(user) {
+checkUser = function(user) {
 	user = user || Meteor.user();
 
 	if(!user) // not logged in
