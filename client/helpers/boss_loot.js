@@ -50,11 +50,16 @@ Template.loot_player_filter.rendered = function() {
 
 Template.loot_player_filter.helpers({
 	'names': function() {
-		return Players.find().fetch().map(function(e) { return e.name; });
+		return Players.findFaster().fetch().map(function(e) { return e.name; });
 	},
 
 	'getLootsheetUser': function() {
 		return Session.get('lootsheetUser');
+	},
+
+	'getUpdated': function() {
+		console.log('get updated', (Players.findOneFaster({name: Session.get('lootsheetUser')})||{}).lastUpdated);
+		return (Players.findOneFaster({name: Session.get('lootsheetUser')})||{}).lastUpdated;
 	}
 });
 

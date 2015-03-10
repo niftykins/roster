@@ -68,5 +68,11 @@
 				<i class="search icon"></i>
 			{{/if}}
 		</div>
+
+		{{#if getUpdated}}
+			<div class="counter">
+				{{getLootsheetUser}} last updated {{timeago getUpdated}}
+			</div>
+		{{/if}}
 	</div>
 </template>

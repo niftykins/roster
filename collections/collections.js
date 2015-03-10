@@ -164,7 +164,7 @@ Meteor.methods({
 		if ( ! _.contains(['none', 'side', 'any', 'mythic', 'bis', 'the dream'], selection))
 			throw new Meteor.Error(422, "Invalid selection.");
 
-		var u = {};
+		var u = {lastUpdated: (new Date()).getTime()};
 		u['wants.'+itemID] = selection;
 
 		Players.update({name: playerName}, {$set: u});
