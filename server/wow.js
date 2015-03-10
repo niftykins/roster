@@ -1,4 +1,150 @@
 WOW = {
+	classes: {
+		"warrior": 1,
+		"paladin": 2,
+		"hunter": 3,
+		"rogue": 4,
+		"priest": 5,
+		"deathknight": 6,
+		"shaman": 7,
+		"mage": 8,
+		"warlock": 9,
+		"monk": 10,
+		"druid": 11,
+
+		1: "warrior",
+		2: "paladin",
+		3: "hunter",
+		4: "rogue",
+		5: "priest",
+		6: "deathknight",
+		7: "shaman",
+		8: "mage",
+		9: "warlock",
+		10: "monk",
+		11: "druid"
+	},
+
+	allClasses: ["warrior", "paladin", "hunter", "rogue", "priest", "deathknight", "shaman", "mage", "warlock", "monk", "druid"],
+
+	classCanUse: {
+		"warrior": [
+			"misc",
+			"plate",
+			"1h sword",
+			"2h sword",
+			"1h axe",
+			"2h axe",
+			"1h mace",
+			"2h mace",
+			"polearm",
+			"shield",
+		],
+
+		"paladin": [
+			"misc",
+			"plate",
+			"1h sword",
+			"2h sword",
+			"1h axe",
+			"2h axe",
+			"1h mace",
+			"2h mace",
+			"polearm",
+			"shield"
+		],
+
+		"hunter": [
+			"misc",
+			"mail",
+			"crossbow",
+			"gun",
+			"bow"
+		],
+
+		"rogue": [
+			"misc",
+			"leather",
+			"1h sword",
+			"1h axe",
+			"1h mace",
+			"dagger",
+			"fist"
+		],
+
+		"priest": [
+			"misc",
+			"cloth",
+			"staff",
+			"1h mace",
+			"dagger",
+			"wand"
+		],
+
+		"deathknight": [
+			"misc",
+			"plate",
+			"1h sword",
+			"2h sword",
+			"1h axe",
+			"2h axe",
+			"1h mace",
+			"2h mace",
+			"polearm"
+		],
+
+		"shaman": [
+			"misc",
+			"mail",
+			"staff",
+			"1h axe",
+			"1h mace",
+			"dagger",
+			"shield",
+			"fist"
+		],
+
+		"mage": [
+			"misc",
+			"cloth",
+			"staff",
+			"1h sword",
+			"dagger",
+			"wand"
+		],
+
+		"warlock": [
+			"misc",
+			"cloth",
+			"staff",
+			"1h sword",
+			"dagger",
+			"wand"
+		],
+
+		"monk": [
+			"misc",
+			"leather",
+			"staff",
+			"1h sword",
+			"1h axe",
+			"1h mace",
+			"polearm",
+			"fist"
+		],
+
+		"druid": [
+			"misc",
+			"leather",
+			"staff",
+			"1h mace",
+			"2h mace",
+			"dagger",
+			"polearm",
+			"fist"
+		]
+	},
+
 	stat: {
 		3: "agility",
 		4: "strength",
@@ -21,6 +167,7 @@ WOW = {
 	},
 
 	inventoryType: {
+		0: "",
 		1: "head",
 		2: "neck",
 		3: "shoulder",
@@ -45,7 +192,8 @@ WOW = {
 		22: "offhand",
 		23: "held in offhand",
 		24: "ammo",
-		25: "thrown"
+		25: "thrown",
+		26: "ranged" // not sure
 	},
 
 	quality: {
@@ -98,6 +246,14 @@ WOW = {
 				4: "plate",
 				5: "cosmetic",
 				6: "shield"
+			}
+		},
+
+		15: {
+			name: "misc",
+			itemSubClass: {
+				0: "tier token",
+				5: "mount"
 			}
 		}
 	}

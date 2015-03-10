@@ -1,6 +1,70 @@
 <template name="lootsheet">
-	{{debug}}
-	{{#each this}}
-		<div><a href="http://www.wowhead.com/item={{this.itemID}}" rel="item={{this.itemID}}">{{this.itemID}}: {{this.name}} is a {{this.rarity}} {{this.type}} {{this.subType}} {{this.slot}} from {{this.sourceID}}</a></div>
-	{{/each}}
+	<div class="lootsheet">
+		{{> loot_player_filter}}
+
+		{{#each this}}
+			{{> boss_loot}}
+		{{/each}}
+	</div>
+</template>
+
+<template name="boss_loot">
+	<div class="ui segment grid boss loot">
+		<div class="panel">
+			<img class="icon" src="http://images.niftykins.com/roster/{{name}}.png">
+			<h2 class="name">{{name}}</h2>
+		</div>
+
+		<div class="items">
+			{{#each loot}}
+				<div class="row">
+					{{> item}}
+
+					{{#if selection}}
+						{{> item_selections}}
+					{{/if}}
+
+					<div class="others">
+						{{#each others}}
+							{{> item_other}}
+						{{/each}}
+					</div>
+				</div>
+			{{/each}}
+		</div>
+	</div>
+</template>
+
+<template name="item_other">
+	<div name="{{name}}" class="other player {{class}}">
+		<div name="{{name}}" class="text">{{name}}: {{selection}}</div>
+	</div>
+</template>
+
+<template name="item_selections">
+	<div name="{{selection}}" class="no-select selection dk" oncontextmenu="return false;">
+		{{selection}}
+	</div>
+</template>
+
+<template name="item">
+	<div class="item" name="{{itemID}}">
+		<a href="http://www.wowhead.com/item={{itemID}}" rel="item={{itemID}}&amp;bonus=567">
+			<img class="icon" src="http://us.media.blizzard.com/wow/icons/36/{{icon}}.jpg" />
+			<div class="name {{rarity}}">{{name}}</div>
+		</a>
+	</div>
+</template>
+
+<template name="loot_player_filter">
+	<div class="filter">
+		<div class="ui huge icon input">
+			<input class="typeahead" type="text" placeholder="Search..." value="{{getLootsheetUser}}" data-source="names" data-hint="true">
+			{{#if getLootsheetUser}}
+				<i class="close icon" style="cursor: pointer;"></i>
+			{{else}}
+				<i class="search icon"></i>
+			{{/if}}
+		</div>
+	</div>
 </template>

@@ -25,6 +25,13 @@ UI.registerHelper('add', function(value, addition) {
 	return value + addition;
 });
 
+UI.registerHelper('getPlayers', function() {
+	return Players.find().fetch().sort(function(a,b) {
+		if(a.class !== b.class) return (a.class > b.class) ? -1 : 1;
+		return (a.name < b.name) ? -1 : 1;
+	});
+});
+
 UI.registerHelper('debug', function() {
 	console.log("vvv=================vvv");
 	console.log(this);

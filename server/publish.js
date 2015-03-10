@@ -65,34 +65,65 @@ Meteor.methods({
 
 		checkUser();
 
-		console.log(items);
-
 		var cb = function(sourceID, error, result) {
 			if (error || ! result.data) return;
 
 			var d = result.data;
 
-			var item = {
-				sourceID: sourceID,
-				itemID: parseInt(d.id, 10),
-				name: d.name,
-				icon: d.icon,
-				bonusStats: d.bonusStats,
-				itemSpells: d.itemSpells,
-				itemClass: d.itemClass,
-				itemSubClass: d.itemSubClass,
-				quality: d.quality,
-				inventoryType: d.inventoryType
-			};
+			try {
+				var item = {
+					sourceID: parseInt(sourceID, 10),
+					itemID: parseInt(d.id, 10),
+					name: d.name,
+					icon: d.icon,
+					bonusStats: d.bonusStats,
+					itemSpells: d.itemSpells,
+					itemClass: d.itemClass,
+					itemSubClass: d.itemSubClass,
+					quality: d.quality,
+					inventoryType: d.inventoryType
+				};
 
-			item.rarity = WOW.quality[item.quality];
-			item.type = WOW.itemClass[item.itemClass].name;
-			item.subType = WOW.itemClass[item.itemClass].itemSubClass[item.itemSubClass];
-			item.slot = WOW.inventoryType[item.inventoryType];
+				// tier token
+				if ( ! d.equippable) {
+					item.allowedClasses = d.allowableClasses.map(function(n) {
+						return WOW.classes[n];
+					});
 
-			console.log("%d: %s, %s %s %s, from %d", item.itemID, item.name, item.rarity, item.type, item.slot, item.sourceID);
+					var t;
+					switch (item.name.split(' ')[0]) {
+						case 'Leggings': t = 7; break;
+						case 'Chest': t = 5; break;
+						case 'Shoulders': t = 3; break;
+						case 'Gauntlets': t = 10; break;
+						case 'Helm': t = 1; break;
+						case 'Essence': t = 0; break;
+					}
+					item.inventoryType = t;
+				}
 
-			Items.upsert({itemID: item.itemID}, item);
+				item.rarity = WOW.quality[item.quality];
+				item.type = WOW.itemClass[item.itemClass].name;
+				item.subType = WOW.itemClass[item.itemClass].itemSubClass[item.itemSubClass];
+				item.slot = WOW.inventoryType[item.inventoryType];
+
+				if (d.equippable) {
+					able = [];
+
+					WOW.allClasses.forEach(function(cl) {
+						if (_.contains(WOW.classCanUse[cl], item.subType)) able.push(cl);
+					});
+
+					item.allowedClasses = _.unique(able);
+				}
+
+				console.log('%d: %s, %s %s %s, from %d', item.itemID, item.name, item.rarity, item.type, item.slot, item.sourceID, item.allowedClasses);
+
+				Items.upsert({itemID: item.itemID}, item);
+			}
+			catch(e) {
+				console.log('BROKED', e, d);
+			}
 		};
 
 		Object.keys(items).forEach(function(boss) {
@@ -104,9 +135,10 @@ Meteor.methods({
 });
 
 
-function makeBoss(name, instance, number) {
+function makeBoss(name, id, instance, number) {
 	return {
 		name: name,
+		bossID: id,
 		instance: instance,
 		casters: [],
 		melees: [],
@@ -134,31 +166,31 @@ function setupInstance(name, bosses) {
 		Bosses.remove({instance: name});
 
 		bosses.forEach(function(boss, i) {
-			console.log('Adding %s to %s', boss, name);
-			Bosses.insert(makeBoss(boss, name, i));
+			console.log('Adding %s:%d to %s', boss[0], boss[1], name);
+			Bosses.insert(makeBoss(boss[0], boss[1], name, i));
 		});
 	}
 }
 
 setupInstance('highmaul', [
-	'Kargath Bladefist',
-	'The Butcher',
-	'Tectus',
-	'Brackenspore',
-	'Twin Ogron',
-	'Ko\'ragh',
-	'Imperator Mar\'gok'
+	['Kargath Bladefist', 78714],
+	['The Butcher', 77404],
+	['Tectus', 78948],
+	['Brackenspore', 78491],
+	['Twin Ogron', 78238],
+	['Ko\'ragh', 79015],
+	['Imperator Mar\'gok', 77428]
 ]);
 
 setupInstance('blackrock foundry', [
-	'Beastlord Darmac',
-	'Flamebender Ka\'graz',
-	'Gruul the Subjugated',
-	'The Blast Furnace',
-	'Hans\'gar and Franzok',
-	'Iron Maidens',
-	'Kromog',
-	'Operator Thogar',
-	'Oregorger',
-	'Warlord Blackhand'
+	['Beastlord Darmac', 76865],
+	['Flamebender Ka\'graz', 76814],
+	['Gruul the Subjugated', 76877],
+	['The Blast Furnace', 76806],
+	['Hans\'gar and Franzok', 76973],
+	['Iron Maidens', 77557],
+	['Kromog', 77692],
+	['Operator Thogar', 76906],
+	['Oregorger', 77182],
+	['Warlord Blackhand', 77325]
 ]);

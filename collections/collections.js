@@ -50,7 +50,8 @@ Meteor.methods({
 		var player = {
 			name: data.name,
 			role: data.role,
-			class: data.class
+			class: data.class,
+			wants: {}
 		};
 
 		var existing = Players.findOne({name: player.name});
@@ -153,5 +154,19 @@ Meteor.methods({
 
 		Bosses.update(a._id, {$inc: {number: value}});
 		Bosses.update(b._id, {$inc: {number: -value}});
+	},
+
+	makeSelection: function(selection, itemID, playerName) {
+		check(selection, String);
+		check(itemID, Match.Integer);
+		check(playerName, String);
+
+		if ( ! _.contains(['none', 'side', 'any', 'mythic', 'bis', 'the dream'], selection))
+			throw new Meteor.Error(422, "Invalid selection.");
+
+		var u = {};
+		u['wants.'+itemID] = selection;
+
+		Players.update({name: playerName}, {$set: u});
 	}
 });

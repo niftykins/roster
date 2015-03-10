@@ -35,6 +35,11 @@ classColour(colour)
 	background-color colour
 	border-color colour
 
+veticalCenter()
+	position absolute
+	top 50%
+	transform translateY(-50%)
+
 
 @import url("//fonts.googleapis.com/css?family=Lato:400,700")
 
@@ -115,6 +120,108 @@ body
 		margin-top 20px
 		text-align center
 		font-size 22pt
+
+.lootsheet
+	margin-top 100px
+
+.boss.loot
+	.panel
+		width 200px !important
+		position relative
+		min-height 70px
+		text-align left !important
+		margin-bottom 10px
+
+		.icon
+			veticalCenter()
+			width 60px
+			left 0
+
+		.name
+			margin 0 0 0 70px
+			veticalCenter()
+
+	.items
+		white-space nowrap
+		overflow-x auto
+
+		.item
+			display inline-block
+			position relative
+			width 180px
+			padding-right 20px
+			height 50px
+			margin-bottom 10px
+			white-space normal
+			background-color colour-segment
+
+			&:last-child
+				margin-bottom 0
+
+			a
+				text-decoration none
+
+			.epic
+				color #A335EE
+			.legendary
+				color #FF8000
+
+			.icon
+				veticalCenter()
+
+			.name
+				width 140px
+				margin-left 40px
+				veticalCenter()
+
+		.selection
+			vertical-align top
+			display inline-block
+			width 100px
+			height 50px
+			line-height 50px
+			text-align center
+			border-radius 5px
+			font-size 1rem
+			cursor pointer
+			margin-right 50px
+
+		.others
+			display inline-block
+			vertical-align top
+
+		.player
+			position relative
+			width 104px
+			height 50px
+			text-align center
+			margin-right 4px
+			display inline-block
+			border-radius 5px
+			margin-bottom 8px
+			cursor pointer
+
+			.text
+				white-space normal
+				font-size 1rem
+				veticalCenter()
+				width inherit
+
+		.options
+			display inline-block
+			vertical-align top
+			margin-left 200px
+
+		.option
+			width 104px
+			height 50px
+			line-height 50px
+			text-align center
+			margin-right 4px
+			display inline-block
+			border-radius 5px
+			margin-bottom 8px
+			font-size 1rem
 
 .order
 	width 550px
@@ -283,13 +390,13 @@ body
 		cursor pointer
 		width 75px
 		height 75px
-		background-color #d1d1d1
+		background-color colour-segment
 		margin-bottom 7px
 		border-bottom-right-radius 0.5em
 		border-top-right-radius 0.5em
 
 		&.active, &:hover
-			background-color darken(#d1d1d1, 10%)
+			background-color darken(colour-segment, 10%)
 
 		img
 			width 60px
