@@ -142,8 +142,17 @@ body
 			veticalCenter()
 
 	.items
-		white-space nowrap
-		overflow-x auto
+		font-size 0
+
+		.row
+			clear both
+
+		.left
+			float left
+			width 200px
+
+			&.wide
+				width 350px
 
 		.item
 			display inline-block
@@ -154,6 +163,7 @@ body
 			margin-bottom 10px
 			white-space normal
 			background-color colour-segment
+			font-size 1rem
 
 			&:last-child
 				margin-bottom 0
@@ -167,6 +177,7 @@ body
 				color #FF8000
 
 			.icon
+				border-radius 5px
 				veticalCenter()
 
 			.name
@@ -187,7 +198,7 @@ body
 			margin-right 50px
 
 		.others
-			display inline-block
+			overflow hidden
 			vertical-align top
 
 		.player

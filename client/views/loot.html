@@ -18,11 +18,13 @@
 		<div class="items">
 			{{#each loot}}
 				<div class="row">
-					{{> item}}
+					<div class="left {{#if selection}}wide{{/if}}">
+						{{> item}}
 
-					{{#if selection}}
-						{{> item_selections}}
-					{{/if}}
+						{{#if selection}}
+							{{> item_selections}}
+						{{/if}}
+					</div>
 
 					<div class="others">
 						{{#each others}}

@@ -27,6 +27,8 @@ WOW = {
 
 	allClasses: ["warrior", "paladin", "hunter", "rogue", "priest", "deathknight", "shaman", "mage", "warlock", "monk", "druid"],
 
+	allRoles: ["caster", "melee", "tank", "healer"],
+
 	classCanUse: {
 		"warrior": [
 			"misc",
@@ -142,6 +144,37 @@ WOW = {
 			"dagger",
 			"polearm",
 			"fist"
+		]
+	},
+
+	roleCanUse: {
+		"caster": [
+			5,
+			73,
+			74,
+			45
+		],
+
+		"melee": [
+			3,
+			72,
+			73,
+			74,
+		],
+
+		"tank": [
+			4,
+			72,
+			74,
+			50
+		],
+
+		"healer": [
+			5,
+			73,
+			74,
+			45,
+			6
 		]
 	},
 

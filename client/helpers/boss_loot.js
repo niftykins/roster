@@ -14,7 +14,7 @@ Template.item_selections.events({
 		var direction = e.which === 1 ? 1 : -1;
 
 		var itemID = parseInt($t.siblings('.item').attr('name'));
-		var playerName = Session.get('user');
+		var playerName = Session.get('lootsheetUser');
 
 		var current = $t.attr('name');
 		var i = selectionsList.indexOf(current);

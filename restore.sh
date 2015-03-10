@@ -1,0 +1,81 @@
+#!/bin/bash
+#                    __
+#   _____    ____  _/  |_   ____    ____  _______
+#  /     \ _/ __ \ \   __\_/ __ \  /  _ \ \_  __ \
+# |  Y Y  \\  ___/  |  |  \  ___/ (  <_> ) |  | \/
+# |__|_|  / \___  > |__|   \___  > \____/  |__|
+#      \/      \/             \/
+#                           __
+# _______   ____    _______/  |_   ____  _______   ____
+# \_  __ \_/ __ \  /  ___/\   __\ /  _ \ \_  __ \_/ __ \
+# |  | \/\  ___/  \___ \  |  |  (  <_> ) |  | \/\  ___/
+# |__|    \___  >/____  > |__|   \____/  |__|    \___  >
+#             \/      \/                             \/
+#
+# The meteor.com Hot Restore 1-step
+# Restore a mongo db from a local dump dir to a live meteor app.
+#
+# Splits up the output of:
+#    meteor mongo $METEOR_DOMAIN --url
+# and pushes it into
+#    mongorestore -u $MONGO_USER -h $MONGO_DOMAIN -d $MONGO_DB -p "${MONGO_PASSWORD}" $TARGET_DIRECTORY
+#
+# Doing so by hand is tedious as the password in the url is only valid for 60 seconds.
+#
+# Requires
+# - meteor  (tested on 0.6.5.1)
+# - mongodb (tested in 2.4.6)
+#
+# Usage
+#    ./meteor-dump.sh myapp.meteor.com ~/dumps
+#
+# If all goes well it will restore the specified database from the local dump folder.
+#
+# By @olizilla
+# On 2013-03-20. Using this script after it's sell by date may void your warranty.
+#
+# Minor mods by @locksmithdon
+# On 2013-09-14. Using voided warranty.
+
+METEOR_DOMAIN="$1"
+TARGET_DIRECTORY="$2"
+
+if [[ ( "$METEOR_DOMAIN" == "" ) || ( "$TARGET_DIRECTORY" == "" ) ]]
+then
+	echo "You need to supply your meteor app name and the directory of the dump to restore"
+	echo "e.g. ./meteor-restore.sh app.meteor.com ~/db-dumps"
+	exit 1
+fi
+
+# REGEX ALL THE THINGS.
+# Chomps the goodness flakes out of urls like "mongodb://client:pass-word@skybreak.member0.mongolayer.com:27017/goto_meteor_com"
+MONGO_URL_REGEX="mongodb:\/\/(.*):(.*)@(.*)\/(.*)"
+
+# stupid tmp file as meteor may want to prompt for a password
+TMP_FILE="/tmp/meteor-restore.tmp"
+
+# Get the mongo url for your meteor app
+meteor mongo $METEOR_DOMAIN --url | tee "${TMP_FILE}"
+
+MONGO_URL=$(sed '/Password:/d' "${TMP_FILE}")
+
+# clean up the temp file
+if [[ -f "${TMP_FILE}" ]]
+then
+	rm "${TMP_FILE}"
+fi
+
+if [[ $MONGO_URL =~ $MONGO_URL_REGEX ]]
+then
+	MONGO_USER="${BASH_REMATCH[1]}"
+	MONGO_PASSWORD="${BASH_REMATCH[2]}"
+	MONGO_DOMAIN="${BASH_REMATCH[3]}"
+	MONGO_DB="${BASH_REMATCH[4]}"
+
+	#e.g mongodump -u client -h skybreak.member0.mongolayer.com:27017 -d goto_meteor_com -p "guid-style-password"
+	mongorestore -u $MONGO_USER -h $MONGO_DOMAIN -d $MONGO_DB -p "${MONGO_PASSWORD}" $TARGET_DIRECTORY
+else
+	echo "Sorry, no restore for you. Couldn't extract your details from the url: ${MONGO_URL}"
+	echo "Give it another go before you get too worried."
+	exit 1
+fi

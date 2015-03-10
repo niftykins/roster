@@ -90,6 +90,8 @@ Meteor.methods({
 						return WOW.classes[n];
 					});
 
+					item.allowedRoles = ['caster', 'melee', 'tank', 'healer'];
+
 					var t;
 					switch (item.name.split(' ')[0]) {
 						case 'Leggings': t = 7; break;
@@ -108,16 +110,32 @@ Meteor.methods({
 				item.slot = WOW.inventoryType[item.inventoryType];
 
 				if (d.equippable) {
-					able = [];
+					// classes
+					var able = [];
 
 					WOW.allClasses.forEach(function(cl) {
 						if (_.contains(WOW.classCanUse[cl], item.subType)) able.push(cl);
 					});
 
 					item.allowedClasses = _.unique(able);
+
+					// roles
+					able = [];
+
+					item.bonusStats.forEach(function(s) {
+						WOW.allRoles.forEach(function(r) {
+							if (_.contains(WOW.roleCanUse[r], s.stat)) able.push(r);
+						});
+
+						// add tanks to stam trinkets
+						if (item.slot === 'trinket' && s.stat === 7)
+							able.push('tank');
+					});
+
+					item.allowedRoles = _.unique(able);
 				}
 
-				console.log('%d: %s, %s %s %s, from %d', item.itemID, item.name, item.rarity, item.type, item.slot, item.sourceID, item.allowedClasses);
+				console.log('%d: %s, %s %s %s, from %d', item.itemID, item.name, item.rarity, item.type, item.slot, item.sourceID, item.allowedRoles);
 
 				Items.upsert({itemID: item.itemID}, item);
 			}
