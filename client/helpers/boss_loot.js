@@ -10,8 +10,8 @@ Template.item_selections.events({
 	'click .selection': function(e) {
 		var $t = $(e.target);
 
-		// possibly makes left go up, else (right) go down?
-		var direction = e.which === 1 ? 1 : -1;
+		// if shift click, go down
+		var direction = e.shiftKey ? -1 : 1;
 
 		var itemID = parseInt($t.siblings('.item').attr('name'));
 		var playerName = Session.get('lootsheetUser');
