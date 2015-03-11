@@ -58,7 +58,6 @@ Template.loot_player_filter.helpers({
 	},
 
 	'getUpdated': function() {
-		console.log('get updated', (Players.findOneFaster({name: Session.get('lootsheetUser')})||{}).lastUpdated);
 		return (Players.findOneFaster({name: Session.get('lootsheetUser')})||{}).lastUpdated;
 	}
 });

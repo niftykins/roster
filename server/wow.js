@@ -5,7 +5,7 @@ WOW = {
 		"hunter": 3,
 		"rogue": 4,
 		"priest": 5,
-		"deathknight": 6,
+		"dk": 6,
 		"shaman": 7,
 		"mage": 8,
 		"warlock": 9,
@@ -17,7 +17,7 @@ WOW = {
 		3: "hunter",
 		4: "rogue",
 		5: "priest",
-		6: "deathknight",
+		6: "dk",
 		7: "shaman",
 		8: "mage",
 		9: "warlock",
@@ -25,7 +25,7 @@ WOW = {
 		11: "druid"
 	},
 
-	allClasses: ["warrior", "paladin", "hunter", "rogue", "priest", "deathknight", "shaman", "mage", "warlock", "monk", "druid"],
+	allClasses: ["warrior", "paladin", "hunter", "rogue", "priest", "dk", "shaman", "mage", "warlock", "monk", "druid"],
 
 	allRoles: ["caster", "melee", "tank", "healer"],
 
@@ -83,7 +83,7 @@ WOW = {
 			"wand"
 		],
 
-		"deathknight": [
+		"dk": [
 			"misc",
 			"plate",
 			"1h sword",
@@ -147,37 +147,6 @@ WOW = {
 		]
 	},
 
-	roleCanUse: {
-		"caster": [
-			5,
-			73,
-			74,
-			45
-		],
-
-		"melee": [
-			3,
-			72,
-			73,
-			74,
-		],
-
-		"tank": [
-			4,
-			72,
-			74,
-			50
-		],
-
-		"healer": [
-			5,
-			73,
-			74,
-			45,
-			6
-		]
-	},
-
 	stat: {
 		3: "agility",
 		4: "strength",
@@ -232,8 +201,8 @@ WOW = {
 	quality: {
 		0: "poor", // 9D9D9D
 		1: "common", // FFFFFF
-		2: "uncommon",
-		3: "rare", // 1EFF00
+		2: "uncommon", // 1EFF00
+		3: "rare", // 0070DD
 		4: "epic", // A335EE
 		5: "legendary" // FF8000
 	},

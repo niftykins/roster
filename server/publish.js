@@ -38,6 +38,161 @@ var FancySupportSignatureGenerator = function(cid) {
 	if (secret) return crypto.createHash('sha1').update(cid + secret).digest('hex');
 };
 
+
+var Roles = function() {
+	this.wipe();
+	return this;
+};
+
+Roles.prototype.wipe = function() {
+	this.tank = [];
+	this.healer = [];
+	this.caster = [];
+	this.melee = [];
+	return this;
+};
+
+Roles.prototype.pushClasses = function(r, c) {
+	c.forEach(function(i) {
+		this[r].push(i);
+	}, this);
+};
+
+Roles.prototype.agility = function() {
+	this.pushClasses('melee', ['shaman', 'rogue', 'monk', 'druid']);
+	this.pushClasses('tank', ['monk', 'druid']);
+	this.pushClasses('caster', ['hunter']);
+	return this;
+};
+
+Roles.prototype.intellect = function() {
+	this.pushClasses('healer', ['shaman', 'priest', 'paladin', 'monk', 'druid']);
+	this.pushClasses('caster', ['druid', 'shaman', 'warlock', 'priest', 'mage']);
+	return this;
+};
+
+Roles.prototype.strength = function() {
+	this.pushClasses('tank', ['warrior', 'paladin', 'dk']);
+	this.pushClasses('melee', ['warrior', 'paladin', 'dk']);
+	return this;
+};
+
+Roles.prototype.tanks = function() {
+	this.pushClasses('tank', ['warrior', 'paladin', 'dk', 'monk', 'druid']);
+	return this;
+};
+
+Roles.prototype.healers = function() {
+	this.pushClasses('healer', ['shaman', 'priest', 'paladin', 'monk', 'druid']);
+	return this;
+};
+
+var itemDecider = function(item) {
+	// tier token
+	if ( ! item.equippable) {
+		item.allowedClasses = item._allowableClasses.map(function(n) {
+			return WOW.classes[n];
+		});
+
+		item.allowed = {
+			tank: item.allowedClasses,
+			healer: item.allowedClasses,
+			melee: item.allowedClasses,
+			caster: item.allowedClasses
+		};
+
+		var t;
+		switch (item.name.split(' ')[0]) {
+			case 'Leggings': t = 7; break;
+			case 'Chest': t = 5; break;
+			case 'Shoulders': t = 3; break;
+			case 'Gauntlets': t = 10; break;
+			case 'Helm': t = 1; break;
+			case 'Essence': t = 0; break;
+		}
+		item.inventoryType = t;
+	}
+
+	item.rarity = WOW.quality[item.quality];
+	item.type = WOW.itemClass[item.itemClass].name;
+	item.subType = WOW.itemClass[item.itemClass].itemSubClass[item.itemSubClass];
+	item.slot = WOW.inventoryType[item.inventoryType];
+
+	if (item.equippable) {
+		// classes
+		var able = [];
+		WOW.allClasses.forEach(function(cl) {
+			if (_.contains(WOW.classCanUse[cl], item.subType) || item.slot === 'cloak')
+				able.push(cl);
+		});
+		item.allowedClasses = _.unique(able);
+
+		// filtering based on stats
+		able = new Roles();
+		item.bonusStats.some(function(s) {
+			// tanks only want stam trinkets
+			if (s.stat === 7 && item.slot === 'trinket') {
+				able.wipe().tanks();
+				return true;
+			}
+
+			if (item.slot === 'shield') {
+				able.wipe();
+				able.tank = ['paladin', 'warrior'];
+				able.healer = ['shaman'];
+				able.caster = ['shaman'];
+				return true;
+			}
+
+			// healers only want spirit loot
+			if (s.stat === 6) {
+				able.wipe().healers();
+				return true;
+			}
+
+			// only tanks want BA
+			if (s.stat === 50) {
+				able.wipe().tanks();
+				return true;
+			}
+
+			switch (s.stat) {
+				case 3: able.agility(); break;
+				case 4: able.strength(); break;
+				case 5: able.intellect(); break;
+				case 72: able.agility().strength(); break;
+				case 73: able.agility().intellect(); break;
+				case 74: able.intellect().strength(); break;
+			}
+		});
+
+		// check for some trinket edge cases
+		if (item.itemSpells && item.itemSpells.length) {
+			item.itemSpells.some(function(s) {
+				var desc = s.spell.description.toLowerCase();
+
+				if (desc.indexOf('armor') > -1) {
+					able.wipe().tanks();
+					return true;
+				}
+
+				if (desc.indexOf('spirit') > -1) {
+					able.wipe().healers();
+					return true;
+				}
+			});
+		}
+
+		_.each(able, function(r, i) {
+			able[i] = _.unique(r);
+		});
+
+		item.allowed = able;
+	}
+
+	return item;
+};
+
 Meteor.methods({
 	fancysupport_data: function() {
 		var user = Meteor.user();
@@ -81,61 +236,14 @@ Meteor.methods({
 					itemClass: d.itemClass,
 					itemSubClass: d.itemSubClass,
 					quality: d.quality,
-					inventoryType: d.inventoryType
+					inventoryType: d.inventoryType,
+					equippable: d.equippable,
+					_allowableClasses: d.allowableClasses
 				};
 
-				// tier token
-				if ( ! d.equippable) {
-					item.allowedClasses = d.allowableClasses.map(function(n) {
-						return WOW.classes[n];
-					});
+				item = itemDecider(item);
 
-					item.allowedRoles = ['caster', 'melee', 'tank', 'healer'];
-
-					var t;
-					switch (item.name.split(' ')[0]) {
-						case 'Leggings': t = 7; break;
-						case 'Chest': t = 5; break;
-						case 'Shoulders': t = 3; break;
-						case 'Gauntlets': t = 10; break;
-						case 'Helm': t = 1; break;
-						case 'Essence': t = 0; break;
-					}
-					item.inventoryType = t;
-				}
-
-				item.rarity = WOW.quality[item.quality];
-				item.type = WOW.itemClass[item.itemClass].name;
-				item.subType = WOW.itemClass[item.itemClass].itemSubClass[item.itemSubClass];
-				item.slot = WOW.inventoryType[item.inventoryType];
-
-				if (d.equippable) {
-					// classes
-					var able = [];
-
-					WOW.allClasses.forEach(function(cl) {
-						if (_.contains(WOW.classCanUse[cl], item.subType)) able.push(cl);
-					});
-
-					item.allowedClasses = _.unique(able);
-
-					// roles
-					able = [];
-
-					item.bonusStats.forEach(function(s) {
-						WOW.allRoles.forEach(function(r) {
-							if (_.contains(WOW.roleCanUse[r], s.stat)) able.push(r);
-						});
-
-						// add tanks to stam trinkets
-						if (item.slot === 'trinket' && s.stat === 7)
-							able.push('tank');
-					});
-
-					item.allowedRoles = _.unique(able);
-				}
-
-				console.log('%d: %s, %s %s %s, from %d', item.itemID, item.name, item.rarity, item.type, item.slot, item.sourceID, item.allowedRoles);
+				console.log('%d: %s, %s %s %s, from %d', item.itemID, item.name, item.rarity, item.type, item.slot, item.sourceID, item.allowed);
 
 				Items.upsert({itemID: item.itemID}, item);
 			}
@@ -148,6 +256,22 @@ Meteor.methods({
 			items[boss].forEach(function(itemID) {
 				HTTP.get('https://us.battle.net/api/wow/item/' + itemID + '/raid-heroic', cb.bind(null, boss));
 			});
+		});
+	},
+
+	fixItems: function(list) {
+		check(list, Match.Optional([Match.Integer]));
+
+		checkUser();
+
+		var filter = {};
+		if (list) filter = {itemID: {$in: list}};
+
+		var items = Items.findFaster(filter).fetch();
+
+		items.forEach(function(item) {
+			item = itemDecider(item);
+			Items.update(item._id, item);
 		});
 	}
 });
