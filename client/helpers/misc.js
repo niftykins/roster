@@ -10,6 +10,10 @@ UI.registerHelper('getFilter', function() {
 	return Session.get('filter');
 });
 
+UI.registerHelper('getLootsheetUser', function() {
+	return Session.get('lootsheetUser');
+});
+
 UI.registerHelper('gridView', function() {
 	return Session.get('view');
 });

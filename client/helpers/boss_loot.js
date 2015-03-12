@@ -41,6 +41,21 @@ Template.item_other.events({
 	}
 });
 
+Template.boss_coin.events({
+	'click .coin': function(e) {
+		var $t = $(e.target).closest('.coin');
+
+		var value = $t.hasClass('coining') ? false : true;
+
+		var playerName = Session.get('lootsheetUser');
+		var boss = this.bossID;
+
+		Meteor.call('makeCoin', value, boss, playerName, function(error) {
+			if(error) return console.log(error);
+		});
+	}
+});
+
 
 // FILTER BOX
 
@@ -51,10 +66,6 @@ Template.loot_player_filter.rendered = function() {
 Template.loot_player_filter.helpers({
 	'names': function() {
 		return Players.findFaster().fetch().map(function(e) { return e.name; });
-	},
-
-	'getLootsheetUser': function() {
-		return Session.get('lootsheetUser');
 	},
 
 	'getUpdated': function() {

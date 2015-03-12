@@ -51,7 +51,8 @@ Meteor.methods({
 			name: data.name,
 			role: data.role,
 			class: data.class,
-			wants: {}
+			wants: {},
+			coining: {}
 		};
 
 		var existing = Players.findOne({name: player.name});
@@ -166,6 +167,17 @@ Meteor.methods({
 
 		var u = {lastUpdated: (new Date()).getTime()};
 		u['wants.'+itemID] = selection;
+
+		Players.update({name: playerName}, {$set: u});
+	},
+
+	makeCoin: function(value, bossID, playerName) {
+		check(value, Boolean);
+		check(bossID, Match.Integer);
+		check(playerName, String);
+
+		var u = {lastUpdated: (new Date()).getTime()};
+		u['coining.'+bossID] = value;
 
 		Players.update({name: playerName}, {$set: u});
 	}

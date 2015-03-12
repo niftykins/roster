@@ -15,6 +15,10 @@
 			<h2 class="name">{{name}}</h2>
 		</div>
 
+		{{#if getLootsheetUser}}
+			{{> boss_coin}}
+		{{/if}}
+
 		<div class="items">
 			{{#each loot}}
 				<div class="row">
@@ -34,6 +38,12 @@
 				</div>
 			{{/each}}
 		</div>
+	</div>
+</template>
+
+<template name="boss_coin">
+	<div class="coin {{#if coining}}coining{{/if}}" title="{{#if coining}}coining{{else}}not coining{{/if}}">
+		<img src="/caster2.png" />
 	</div>
 </template>
 
