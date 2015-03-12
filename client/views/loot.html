@@ -1,6 +1,7 @@
 <template name="lootsheet">
 	<div class="lootsheet">
 		{{> loot_player_filter}}
+		{{> lootsheet_help_icon}}
 
 		{{#each this}}
 			{{> boss_loot}}
@@ -87,4 +88,10 @@
 			</div>
 		{{/if}}
 	</div>
+</template>
+
+<template name="lootsheet_help_icon">
+	<a class="help" href="{{pathFor 'lootsheet_help'}}">
+		<i class="bigger help icon"></i>
+	</a>
 </template>

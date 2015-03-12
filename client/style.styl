@@ -127,8 +127,85 @@ body
 		text-align center
 		font-size 22pt
 
+.lootsheet-help
+	background-color colour-segment !important
+	max-width 750px
+	margin 100px auto 0 auto !important
+
+	h2
+		margin-bottom 0
+
+	.step
+		margin-bottom 30px
+		&:last-child
+			margin-bottom 0
+
+	.selections > div
+		margin-bottom 10px
+		line-height 50px
+
+		& > div
+			vertical-align top
+			display inline-block
+			width 100px
+			height 50px
+			line-height 50px
+			text-align center
+			border-radius 5px
+			font-size 1rem
+			cursor pointer
+			margin-right 20px
+			margin-left 50px
+
+			background-color transparent
+			box-sizing border-box
+			line-height 44px
+			border 3px solid darken(colour-segment, 20%)
+
+			&.none
+				selectionColour(#9D9D9D)
+			&.side
+				selectionColour(#FFF)
+			&.any
+				selectionColour(#1EFF00)
+			&.mythic
+				selectionColour(#0070DD)
+			&.bis
+				selectionColour(#A335EE)
+			&.dream
+				selectionColour(#FF8000)
+
+	.coin
+		width 100px
+		height 50px
+		text-align center
+		border-radius 5px
+		cursor pointer
+		background-color colour-remove
+		margin 0 0 10px 50px
+
+		&.coining
+			background-color colour-add
+
 .lootsheet
 	margin-top 100px
+
+	.help
+		position fixed
+		left 0
+		top 300px
+		cursor pointer
+		width 75px
+		height 75px
+		line-height 75px
+		background-color colour-segment
+		border-bottom-right-radius 0.5em
+		border-top-right-radius 0.5em
+		text-decoration none
+		color initial
+
+		&:hover
+			background-color darken(colour-segment, 10%)
 
 .boss.loot
 	.panel
@@ -229,13 +306,13 @@ body
 				selectionColour(#9D9D9D)
 			&[name="side"]
 				selectionColour(#FFF)
-			&[name="any"],
+			&[name="any"]
 				selectionColour(#1EFF00)
 			&[name="mythic"]
 				selectionColour(#0070DD)
 			&[name="bis"]
 				selectionColour(#A335EE)
-			&[name="the dream"],
+			&[name="the dream"]
 				selectionColour(#FF8000)
 
 		.others
