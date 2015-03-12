@@ -8,7 +8,7 @@ Template.player.events({
 
 Template.player_admin.events({
 	'click .player': function(e) {
-		var $t = $(e.target);
+		var $t = $(e.target).closest('.player');
 
 		if(isAdmin()) {
 			var call = $t.hasClass('out') ? 'addToBoss' : 'removeFromBoss';
@@ -33,7 +33,7 @@ Template.player_admin.events({
 
 Template.player_admin.helpers({
 	getTitle: function() {
-		return this.items.map(function(item) {
+		return (this.items||[]).map(function(item) {
 			return item.slot + ': ' + this.wants[item.itemID];
 		}, this).join('\n');
 	}
