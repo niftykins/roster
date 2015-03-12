@@ -192,7 +192,7 @@ WOW = {
 		20: "robe",
 		21: "main hand",
 		22: "offhand",
-		23: "held in offhand",
+		23: "offhand",
 		24: "ammo",
 		25: "thrown",
 		26: "ranged" // not sure

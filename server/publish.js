@@ -297,9 +297,10 @@ function makeBoss(name, id, instance, number) {
 }
 
 var instanceCount = 0;
-function setupInstance(name, bosses) {
+function setupInstance(name, id, bosses) {
 	Instances.upsert({name: name}, {$set: {
 		name: name,
+		instanceID: id,
 		number: instanceCount
 	}});
 	instanceCount++;
@@ -314,7 +315,7 @@ function setupInstance(name, bosses) {
 	}
 }
 
-setupInstance('highmaul', [
+setupInstance('highmaul', 6996, [
 	['Kargath Bladefist', 78714],
 	['The Butcher', 77404],
 	['Tectus', 78948],
@@ -324,7 +325,7 @@ setupInstance('highmaul', [
 	['Imperator Mar\'gok', 77428]
 ]);
 
-setupInstance('blackrock foundry', [
+setupInstance('blackrock foundry', 6967, [
 	['Beastlord Darmac', 76865],
 	['Flamebender Ka\'graz', 76814],
 	['Gruul the Subjugated', 76877],
