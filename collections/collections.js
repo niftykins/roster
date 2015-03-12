@@ -165,7 +165,7 @@ Meteor.methods({
 		if ( ! _.contains(['none', 'side', 'any', 'mythic', 'bis', 'the dream'], selection))
 			throw new Meteor.Error(422, "Invalid selection.");
 
-		var u = {lastUpdated: (new Date()).getTime()};
+		var u = {lastUpdated: Date.now()};
 		u['wants.'+itemID] = selection;
 
 		Players.update({name: playerName}, {$set: u});
@@ -176,7 +176,7 @@ Meteor.methods({
 		check(bossID, Match.Integer);
 		check(playerName, String);
 
-		var u = {lastUpdated: (new Date()).getTime()};
+		var u = {lastUpdated: Date.now()};
 		u['coining.'+bossID] = value;
 
 		Players.update({name: playerName}, {$set: u});

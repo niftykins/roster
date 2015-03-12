@@ -33,8 +33,15 @@ Template.player_admin.events({
 
 Template.player_admin.helpers({
 	getTitle: function() {
-		return (this.items||[]).map(function(item) {
+		var items = (this.items||[]).map(function(item) {
 			return item.slot + ': ' + this.wants[item.itemID];
 		}, this).join('\n');
+
+		var coining =  this.isCoining ? 'coining' : '';
+
+		var t = [];
+		if (coining) t.push(coining);
+		if (items) t.push(items);
+		return t.join('\n\n');
 	}
 });
