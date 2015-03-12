@@ -15,9 +15,11 @@
 			<h2 class="name">{{name}}</h2>
 		</div>
 
-		{{#if getLootsheetUser}}
-			{{> boss_coin}}
-		{{/if}}
+		{{#unless uncoinable}}
+			{{#if getLootsheetUser}}
+				{{> boss_coin}}
+			{{/if}}
+		{{/unless}}
 
 		<div class="items">
 			{{#each loot}}
