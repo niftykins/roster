@@ -2,6 +2,14 @@ Template.player.events({
 	'click .player': function(e) {
 		var $t = $(e.target);
 
+		Session.set('filter', $t.attr('name'));
+	}
+});
+
+Template.player_admin.events({
+	'click .player': function(e) {
+		var $t = $(e.target);
+
 		if(isAdmin()) {
 			var call = $t.hasClass('out') ? 'addToBoss' : 'removeFromBoss';
 
@@ -19,8 +27,14 @@ Template.player.events({
 					}
 				});
 			});
-		} else {
-			Session.set('filter', $t.attr('name'));
 		}
+	}
+});
+
+Template.player_admin.helpers({
+	getTitle: function() {
+		return this.items.map(function(item) {
+			return item.slot + ': ' + this.wants[item.itemID];
+		}, this).join('\n');
 	}
 });

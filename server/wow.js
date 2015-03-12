@@ -180,7 +180,7 @@ WOW = {
 		8: "feet",
 		9: "wrist",
 		10: "hands",
-		11: "finger",
+		11: "ring",
 		12: "trinket",
 		13: "1h",
 		14: "shield",

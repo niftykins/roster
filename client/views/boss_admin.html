@@ -4,6 +4,13 @@
 	</div>
 </template>
 
+<template name="player_admin">
+	<div name="{{name}}" class="no-select player {{class}} {{#if out}}out{{/if}}"
+		title="{{getTitle}}">
+		{{#if items.length}}<div class="items">{{items.length}}</div>{{/if}}
+		{{name}}
+	</div>
+</template>
 
 <template name="boss_admin">
 	<div name="{{name}}" class="ui segment boss grid admin">
@@ -52,7 +59,7 @@
 					<div class="row">
 						<div class="melee players">
 							{{#each melees}}
-								{{> player}}
+								{{> player_admin}}
 							{{/each}}
 						</div>
 						<div class="subs">
@@ -70,7 +77,7 @@
 					<div class="row">
 						<div class="casters players">
 							{{#each casters}}
-								{{> player}}
+								{{> player_admin}}
 							{{/each}}
 						</div>
 						<div class="subs">
@@ -88,7 +95,7 @@
 					<div class="row">
 						<div class="healers players">
 							{{#each healers}}
-								{{> player}}
+								{{> player_admin}}
 							{{/each}}
 						</div>
 						<div class="subs">
@@ -106,7 +113,7 @@
 					<div class="row">
 						<div class="tanks players">
 							{{#each tanks}}
-								{{> player}}
+								{{> player_admin}}
 							{{/each}}
 						</div>
 						<div class="subs">
