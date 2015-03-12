@@ -34,16 +34,16 @@ Meteor.methods({
 
 		checkUser();
 
-		if(!data.name || data.name === ' ') {
+		if ( ! data.name || data.name === ' ') {
 			throw new Meteor.Error(422, "Enter a name, noob.");
 		}
 
-		if(!data.role || !_.contains(['caster', 'melee', 'healer', 'tank'], data.role)) {
+		if ( ! data.role || ! _.contains(['caster', 'melee', 'healer', 'tank'], data.role)) {
 			throw new Meteor.Error(422, "Worst. Click on a role.");
 		}
 
 		var classes = ['rogue', 'warrior', 'druid', 'dk', 'paladin', 'priest', 'warlock', 'shaman', 'mage', 'monk', 'hunter'];
-		if(!data.class ||!_.contains(classes, data.class)) {
+		if ( ! data.class || ! _.contains(classes, data.class)) {
 			throw new Meteor.Error(422, "Click on a class colour you bad.");
 		}
 
@@ -57,7 +57,7 @@ Meteor.methods({
 
 		var existing = Players.findOne({name: player.name});
 
-		if (!!existing) {
+		if ( !!existing) {
 			throw new Meteor.Error(302, 'Player already exists.');
 		}
 
@@ -70,13 +70,13 @@ Meteor.methods({
 
 		checkUser();
 
-		if(!name || name === ' ') {
+		if ( ! name || name === ' ') {
 			throw new Meteor.Error(422, "Enter a name, noob.");
 		}
 
 		var player = Players.findOne({name:name});
 
-		if (!player) return;
+		if ( ! player) return;
 
 		Players.remove(player._id);
 
@@ -86,6 +86,45 @@ Meteor.methods({
 		Bosses.update({}, {$pull:update}, {multi:true});
 
 		console.log("Remove Player: ", player);
+	},
+
+	editPlayer: function(data) {
+		check(data, {
+			name: String,
+			rename: Match.Optional(String),
+			role: String,
+			class: String
+		});
+
+		checkUser();
+
+		if ( ! data.name || data.name === ' ') {
+			throw new Meteor.Error(422, "Enter a name, noob.");
+		}
+
+		if ( ! data.role || ! _.contains(['caster', 'melee', 'healer', 'tank'], data.role)) {
+			throw new Meteor.Error(422, "Worst. Click on a role.");
+		}
+
+		var classes = ['rogue', 'warrior', 'druid', 'dk', 'paladin', 'priest', 'warlock', 'shaman', 'mage', 'monk', 'hunter'];
+		if ( ! data.class || ! _.contains(classes, data.class)) {
+			throw new Meteor.Error(422, "Click on a class colour you bad.");
+		}
+
+		var player = {
+			name: data.rename || data.name,
+			role: data.role,
+			class: data.class
+		};
+
+		var existing = Players.findOne({name: data.name});
+
+		if ( ! existing) {
+			throw new Meteor.Error(404, 'Player doesn\'t exist.');
+		}
+
+		Players.update({name: data.name}, {$set: player});
+		console.log("Updated Player: ", data);
 	},
 
 	addToBoss: function(bossName, name) {
