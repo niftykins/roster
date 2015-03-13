@@ -1,26 +1,36 @@
 <template name="menu">
+	<div class="header-bg"></div>
+
 	<div class="menu buttons">
 		{{#if user}}
 			<a href="/logout" title="logout">
 				<i class="bigger red sign out icon"></i>
 			</a>
-			{{#if isAdmin}}
-				<a href="{{pathFor 'roster'}}" title="roster">
-					<i class="bigger black home icon"></i>
-				</a>
-				<a href="{{pathFor 'add'}}" title="add player">
-					<i class="bigger black add icon"></i>
-				</a>
-				<a href="{{pathFor 'remove'}}" title="remove player">
-					<i class="bigger black minus icon"></i>
-				</a>
-				<a href="{{pathFor 'order'}}" title="reorder bosses">
-					<i class="big black ordered list icon"></i>
-				</a>
-			{{/if}}
 		{{else}}
 			<a href="/login" title="login">
 				<i class="bigger green sign in icon"></i>
+			</a>
+		{{/if}}
+
+		<a href="{{pathFor 'roster'}}" title="roster">
+			<i class="bigger black home icon"></i>
+		</a>
+		<a href="{{pathFor 'lootsheet'}}" title="loot">
+			<i class="bigger black cart icon"></i>
+		</a>
+
+		{{#if isAdmin}}
+			<a href="{{pathFor 'add'}}" title="add player">
+				<i class="bigger black add icon"></i>
+			</a>
+			<a href="{{pathFor 'remove'}}" title="remove player">
+				<i class="bigger black minus icon"></i>
+			</a>
+			<a href="{{pathFor 'edit'}}" title="edit player">
+				<i class="bigger black setting icon"></i>
+			</a>
+			<a href="{{pathFor 'order'}}" title="reorder bosses">
+				<i class="smaller bigger black ordered list icon"></i>
 			</a>
 		{{/if}}
 	</div>

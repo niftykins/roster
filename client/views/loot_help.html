@@ -1,0 +1,74 @@
+<template name="lootsheet_help">
+	<div class="lootsheet-help ui segment">
+		<h1>Here's how to use the loot sheet</h1>
+
+		<div class="step">
+			<h2>1.</h2>
+			<p>Type your name into the filter box at the top of the screen. This filters the list to a view just for you.</p>
+			<img src="/search.png" />
+		</div>
+
+		<div class="step">
+			<h2>2.</h2>
+			<p>You should see only items that drop which are usable by your class and spec. This makes selecting the items you want much easier as you only see the things applicable to you.</p>
+
+			<p>There will be a new box next to the item that wasn't there in the unfiltered view, this is how you make your selection for that item.</p>
+			<img src="/selection.png" />
+
+			<p>This selection box comes in six states:</p>
+
+			<div class="selections">
+				<div>
+					<div class="dream">the dream</div>
+					<span>if you're after the 'dream' socketed warforged leech/speed version</span>
+				</div>
+
+				<div>
+					<div class="bis">bis</div>
+					<span>if this is your best in slot piece</span>
+				</div>
+
+				<div>
+					<div class="mythic">mythic</div>
+					<span>if you want the mythic version</span>
+				</div>
+
+				<div>
+					<div class="any">any</div>
+					<span>if you need any version of the item</span>
+				</div>
+
+				<div>
+					<div class="side">side</div>
+					<span>if the item isn't going to be used all the time</span>
+				</div>
+
+				<div>
+					<div class="none">none</div>
+					<span>if you don't want the item</span>
+				</div>
+			</div>
+
+			<p>Clicking increases the value, while shift clicking decreases it.</p>
+		</div>
+
+		<div class="step">
+			<h2>3.</h2>
+			<p>You are also able to see the selections other people have made for that item. This allows you to easily see your competition across all classes and specs.</p>
+
+			<img src="/others.png" />
+		</div>
+
+		<div class="step">
+			<h2>4.</h2>
+			<p>Finally, to convey that you wish to coin a boss, you simply have to toggle the coin button. A colour of green indicates that you intend to use a coin.</p>
+
+			<div class="coin coining" title="coining">
+				<img src="/coin.png" />
+			</div>
+			<div class="coin" title="not coining">
+				<img src="/coin.png" />
+			</div>
+		</div>
+	</div>
+</template>

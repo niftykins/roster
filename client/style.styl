@@ -35,6 +35,17 @@ classColour(colour)
 	background-color colour
 	border-color colour
 
+selectionColour(colour)
+	border-color colour
+	background-color rgba(colour, 0.5)
+	&:hover
+		background-color darken(@background-color, 10%)
+
+veticalCenter()
+	position absolute
+	top 50%
+	transform translateY(-50%)
+
 
 @import url("//fonts.googleapis.com/css?family=Lato:400,700")
 
@@ -55,6 +66,8 @@ body
 .bigger.icon
 	font-size 3em
 	vertical-align middle
+.smaller.bigger.icon
+	font-size 2.5em
 
 .spinner
 	top -100px
@@ -116,9 +129,257 @@ body
 		text-align center
 		font-size 22pt
 
+.lootsheet-help
+	background-color colour-segment !important
+	max-width 750px
+	margin 100px auto 0 auto !important
+
+	h2
+		margin-bottom 0
+
+	.step
+		margin-bottom 30px
+		&:last-child
+			margin-bottom 0
+
+	.selections > div
+		margin-bottom 10px
+		line-height 50px
+
+		& > div
+			vertical-align top
+			display inline-block
+			width 100px
+			height 50px
+			line-height 50px
+			text-align center
+			border-radius 5px
+			font-size 1rem
+			cursor pointer
+			margin-right 20px
+			margin-left 50px
+
+			background-color transparent
+			box-sizing border-box
+			line-height 44px
+			border 3px solid darken(colour-segment, 20%)
+
+			&.none
+				selectionColour(#9D9D9D)
+			&.side
+				selectionColour(#FFF)
+			&.any
+				selectionColour(#1EFF00)
+			&.mythic
+				selectionColour(#0070DD)
+			&.bis
+				selectionColour(#A335EE)
+			&.dream
+				selectionColour(#FF8000)
+
+	.coin
+		width 100px
+		height 50px
+		text-align center
+		border-radius 5px
+		cursor pointer
+		background-color colour-remove
+		margin 0 0 10px 50px
+
+		&.coining
+			background-color colour-add
+
+		img
+			margin-top 5px
+			width 40px
+			height 40px
+
+.lootsheet
+	margin-top 100px
+
+	.help
+		position fixed
+		left 0
+		top 300px
+		cursor pointer
+		width 75px
+		height 75px
+		line-height 75px
+		background-color colour-segment
+		border-bottom-right-radius 0.5em
+		border-top-right-radius 0.5em
+		text-decoration none
+		color initial
+
+		&:hover
+			background-color darken(colour-segment, 10%)
+
+.boss.loot
+	.toggle
+		position absolute
+		top 1rem
+		left 270px
+		height 70px
+
+		i
+			font-size 2em
+			cursor pointer
+			veticalCenter()
+
+	.panel
+		width 250px !important
+		position relative
+		min-height 70px
+		text-align left !important
+
+		.icon
+			veticalCenter()
+			width 60px
+			left 0
+
+		.name
+			margin 0 0 0 70px
+			veticalCenter()
+
+	.coin
+		position absolute
+		right 10px
+		top 10px
+		width 100px
+		height 50px
+		text-align center
+		border-radius 5px
+		cursor pointer
+		background-color colour-remove
+
+		&.coining
+			background-color colour-add
+
+		img
+			margin-top 5px
+			width 40px
+			height 40px
+
+	.items
+		font-size 0
+		margin-top 10px
+
+		.row
+			clear both
+			margin-bottom 15px
+
+			&:last-child
+				margin-bottom 0
+
+		.left
+			float left
+			width 230px
+
+			&.wide
+				width 350px
+
+		.item
+			display inline-block
+			position relative
+			width 180px
+			height 50px
+			margin-bottom 10px
+			white-space normal
+			background-color colour-segment
+			font-size 1rem
+
+			&:last-child
+				margin-bottom 0
+
+			a
+				text-decoration none
+
+			.epic
+				color #A335EE
+			.legendary
+				color #FF8000
+
+			.icon
+				border-radius 5px
+				veticalCenter()
+
+			.name
+				width 140px
+				margin-left 40px
+				veticalCenter()
+
+		.selection
+			vertical-align top
+			display inline-block
+			width 100px
+			height 50px
+			line-height 50px
+			text-align center
+			border-radius 5px
+			font-size 1rem
+			cursor pointer
+			margin-left 20px
+
+			background-color transparent
+			box-sizing border-box
+			line-height 44px
+			border 3px solid darken(colour-segment, 20%)
+
+			&[name="none"]
+				selectionColour(#9D9D9D)
+			&[name="side"]
+				selectionColour(#FFF)
+			&[name="any"]
+				selectionColour(#1EFF00)
+			&[name="mythic"]
+				selectionColour(#0070DD)
+			&[name="bis"]
+				selectionColour(#A335EE)
+			&[name="the dream"]
+				selectionColour(#FF8000)
+
+		.others
+			overflow hidden
+			vertical-align top
+			margin-bottom -8px
+			min-height 58px
+
+		.player
+			position relative
+			display inline-block
+			width 104px
+			height 50px
+			text-align center
+			border-radius 5px
+			margin-right 5px
+			margin-bottom 8px
+			cursor pointer
+
+			.text
+				white-space normal
+				font-size 1rem
+				veticalCenter()
+				width inherit
+
+		.options
+			display inline-block
+			vertical-align top
+			margin-left 200px
+
+		.option
+			width 104px
+			height 50px
+			line-height 50px
+			text-align center
+			margin-right 4px
+			display inline-block
+			border-radius 5px
+			margin-bottom 8px
+			font-size 1rem
+
 .order
 	width 550px
-	margin 50px auto
+	margin 100px auto 0 auto
 
 .boss-order
 	position relative
@@ -224,6 +485,26 @@ body
 		.players
 			width 50%
 
+			.player
+				position relative
+
+				.items, .coin
+					position absolute
+					line-height normal
+					top 3px
+
+				.items
+					left 5px
+
+				.coin
+					right 3px
+					width 15px
+					height 15px
+
+					img
+						width 100%
+						height 100%
+
 		.subs
 			width 45%
 			margin-left 20px
@@ -259,6 +540,15 @@ body
 		& > span
 			font-size 1.1em
 
+.header-bg
+	z-index 10
+	position fixed
+	top 0
+	left 0
+	right 0
+	height 100px
+	background-color colour-bg
+
 .menu.buttons
 	position fixed
 	left 0
@@ -283,13 +573,13 @@ body
 		cursor pointer
 		width 75px
 		height 75px
-		background-color #d1d1d1
+		background-color colour-segment
 		margin-bottom 7px
 		border-bottom-right-radius 0.5em
 		border-top-right-radius 0.5em
 
 		&.active, &:hover
-			background-color darken(#d1d1d1, 10%)
+			background-color darken(colour-segment, 10%)
 
 		img
 			width 60px

@@ -1,6 +1,6 @@
-<template name="add">
+<template name="edit">
 	<div class="player form">
-		<form id="submit-player" class="ui form segment">
+		<form id="submit-edit" class="ui form segment">
 			<div class="ui error message">
 				<i class="close icon"></i>
 				<div class="header"></div>
@@ -9,7 +9,14 @@
 
 			<div class="field">
 				<div class="ui huge icon input">
-					<input type="text" name="name" placeholder="name">
+					<input class="typeahead" type="text" name="name" placeholder="name" data-source="names" data-hint="true">
+					<i class="user icon"></i>
+				</div>
+			</div>
+
+			<div class="field">
+				<div class="ui huge icon input">
+					<input type="text" name="rename" placeholder="optional rename">
 					<i class="user icon"></i>
 				</div>
 			</div>
@@ -63,7 +70,7 @@
 				</div>
 			</div>
 
-			<button class="ui huge fluid black button" type="submit">Add Player</button>
+			<button class="ui huge fluid black button" type="submit">Update Player</button>
 		</form>
 	</div>
 </template>

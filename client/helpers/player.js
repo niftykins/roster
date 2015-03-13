@@ -2,6 +2,14 @@ Template.player.events({
 	'click .player': function(e) {
 		var $t = $(e.target);
 
+		Session.set('filter', $t.attr('name'));
+	}
+});
+
+Template.player_admin.events({
+	'click .player': function(e) {
+		var $t = $(e.target).closest('.player');
+
 		if(isAdmin()) {
 			var call = $t.hasClass('out') ? 'addToBoss' : 'removeFromBoss';
 
@@ -19,8 +27,21 @@ Template.player.events({
 					}
 				});
 			});
-		} else {
-			Session.set('filter', $t.attr('name'));
 		}
+	}
+});
+
+Template.player_admin.helpers({
+	getTitle: function() {
+		var items = (this.items||[]).map(function(item) {
+			return item.slot + ': ' + this.wants[item.itemID];
+		}, this).join('\n');
+
+		var coining =  this.isCoining ? 'coining' : '';
+
+		var t = [];
+		if (coining) t.push(coining);
+		if (items) t.push(items);
+		return t.join('\n\n');
 	}
 });
