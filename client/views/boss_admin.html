@@ -8,7 +8,7 @@
 	<div name="{{name}}" class="no-select player {{class}} {{#if out}}out{{/if}}"
 		title="{{getTitle}}">
 		{{#if items.length}}<div class="items">{{items.length}}</div>{{/if}}
-		{{#if isCoining}}<div class="coin"><img src="/caster2.png" /></div>{{/if}}
+		{{#if isCoining}}<div class="coin"><img src="/coin.png" /></div>{{/if}}
 		{{name}}
 	</div>
 </template>
@@ -24,28 +24,28 @@
 
 			<div name="{{name}}">
 				<div name="melee" class="spot">
-					<img src="/melee2.png">
+					<img src="/melee.png">
 					<i class="triangle large up icon"></i>
 					<span>{{spots.melee}}</span>
 					<i class="triangle large down icon"></i>
 				</div>
 
 				<div name="casters" class="spot">
-					<img src="/caster2.png">
+					<img src="/caster.png">
 					<i class="triangle large up icon"></i>
 					<span>{{spots.casters}}</span>
 					<i class="triangle large down icon"></i>
 				</div>
 
 				<div name="healers" class="spot">
-					<img src="/healer2.png">
+					<img src="/healer.png">
 					<i class="triangle large up icon"></i>
 					<span>{{spots.healers}}</span>
 					<i class="triangle large down icon"></i>
 				</div>
 
 				<div name="tanks" class="spot">
-					<img src="/tank2.png">
+					<img src="/tank.png">
 					<i class="triangle large up icon"></i>
 					<span>{{spots.tanks}}</span>
 					<i class="triangle large down icon"></i>
@@ -56,7 +56,7 @@
 		<div class="slots column">
 			{{#if melees.length}}
 				<div class="role">
-					<img class="ui left floated image" src="/melee2.png">
+					<img class="ui left floated image" src="/melee.png">
 					<div class="row">
 						<div class="melee players">
 							{{#each melees}}
@@ -74,7 +74,7 @@
 
 			{{#if casters.length}}
 				<div class="role">
-					<img class="ui left floated image" src="/caster2.png">
+					<img class="ui left floated image" src="/caster.png">
 					<div class="row">
 						<div class="casters players">
 							{{#each casters}}
@@ -92,7 +92,7 @@
 
 			{{#if healers.length}}
 				<div class="role">
-					<img class="ui left floated image" src="/healer2.png">
+					<img class="ui left floated image" src="/healer.png">
 					<div class="row">
 						<div class="healers players">
 							{{#each healers}}
@@ -110,7 +110,7 @@
 
 			{{#if tanks.length}}
 				<div class="role">
-					<img class="ui left floated image" src="/tank2.png">
+					<img class="ui left floated image" src="/tank.png">
 					<div class="row">
 						<div class="tanks players">
 							{{#each tanks}}
