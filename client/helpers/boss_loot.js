@@ -4,6 +4,25 @@ Template.item_selections.helpers({
 	}
 });
 
+Template.boss_loot.helpers({
+	hideLoot: function() {
+		if ( ! localStorage) return false;
+		Session.get('hide.' + this.bossID);
+
+		// "true" if hidden , "" if shown
+		return !!localStorage.getItem('hide.' + this.bossID);
+	}
+});
+
+Template.boss_loot.events({
+	'click [name="toggle"]': function() {
+		var old = !!localStorage.getItem('hide.' + this.bossID);
+		var v = old ? '' : 'true';
+		localStorage.setItem('hide.' + this.bossID, v);
+		Session.set('hide.' + this.bossID, Date.now());
+	}
+});
+
 selectionsList = ['none', 'side', 'any', 'mythic', 'bis', 'the dream'];
 
 Template.item_selections.events({

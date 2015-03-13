@@ -215,12 +215,22 @@ body
 			background-color darken(colour-segment, 10%)
 
 .boss.loot
+	.toggle
+		position absolute
+		top 1rem
+		left 270px
+		height 70px
+
+		i
+			font-size 2em
+			cursor pointer
+			veticalCenter()
+
 	.panel
-		width 200px !important
+		width 250px !important
 		position relative
 		min-height 70px
 		text-align left !important
-		margin-bottom 10px
 
 		.icon
 			veticalCenter()
@@ -252,6 +262,7 @@ body
 
 	.items
 		font-size 0
+		margin-top 10px
 
 		.row
 			clear both

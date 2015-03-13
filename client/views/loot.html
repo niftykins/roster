@@ -16,31 +16,37 @@
 			<h2 class="name">{{name}}</h2>
 		</div>
 
-		{{#unless uncoinable}}
-			{{#if getLootsheetUser}}
-				{{> boss_coin}}
-			{{/if}}
-		{{/unless}}
-
-		<div class="items">
-			{{#each loot}}
-				<div class="row">
-					<div class="left {{#if selection}}wide{{/if}}">
-						{{> item}}
-
-						{{#if selection}}
-							{{> item_selections}}
-						{{/if}}
-					</div>
-
-					<div class="others">
-						{{#each others}}
-							{{> item_other}}
-						{{/each}}
-					</div>
-				</div>
-			{{/each}}
+		<div class="toggle">
+			<i name="toggle" class="{{#if hideLoot}}expand{{else}}collapse{{/if}} icon" title="toggle loot display"></i>
 		</div>
+
+		{{#unless hideLoot}}
+			{{#unless uncoinable}}
+				{{#if getLootsheetUser}}
+					{{> boss_coin}}
+				{{/if}}
+			{{/unless}}
+
+			<div class="items">
+				{{#each loot}}
+					<div class="row">
+						<div class="left {{#if selection}}wide{{/if}}">
+							{{> item}}
+
+							{{#if selection}}
+								{{> item_selections}}
+							{{/if}}
+						</div>
+
+						<div class="others">
+							{{#each others}}
+								{{> item_other}}
+							{{/each}}
+						</div>
+					</div>
+				{{/each}}
+			</div>
+		{{/unless}}
 	</div>
 </template>
 
