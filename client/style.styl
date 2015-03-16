@@ -204,6 +204,29 @@ body
 .lootsheet
 	margin-top 100px
 
+	.filter
+		.update
+			position absolute
+			width 100%
+			bottom 28px
+			right -235px
+			text-align center
+			z-index 19
+
+			& > div
+				line-height 55px
+				margin auto
+				width 104px
+				height 55px
+				text-align center
+				border-radius 5px
+				font-size 1.1rem
+				cursor pointer
+				background-color colour-segment
+
+				&:hover
+					background-color darken(colour-segment, 10%)
+
 	.help
 		position fixed
 		left 0

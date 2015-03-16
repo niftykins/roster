@@ -109,5 +109,15 @@ Template.loot_player_filter.events({
 
 	'click .close': function(e) {
 		Session.set('lootsheetUser', null);
+	},
+
+	'click .update': function(e) {
+		var $t = $(e.target).closest('.update');
+
+		var playerName = Session.get('lootsheetUser');
+
+		Meteor.call('updateLastUpdated', playerName, function(error) {
+			if (error) return console.log(error);
+		});
 	}
 });

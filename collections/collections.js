@@ -219,5 +219,12 @@ Meteor.methods({
 		u['coining.'+bossID] = value;
 
 		Players.update({name: playerName}, {$set: u});
+	},
+
+	updateLastUpdated: function(playerName) {
+		check(playerName, String);
+
+		var u = {lastUpdated: Date.now()};
+		Players.update({name: playerName}, {$set: u});
 	}
 });
