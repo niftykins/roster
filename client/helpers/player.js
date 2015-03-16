@@ -39,9 +39,12 @@ Template.player_admin.helpers({
 
 		var coining =  this.isCoining ? 'coining' : '';
 
+		var outdated = this.outdated ? 'updated ' + Timeago(this.lastUpdated) : '';
+
 		var t = [];
 		if (coining) t.push(coining);
 		if (items) t.push(items);
+		if (outdated) t.push(outdated);
 		return t.join('\n\n');
 	}
 });

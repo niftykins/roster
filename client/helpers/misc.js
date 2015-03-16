@@ -30,6 +30,17 @@ UI.registerHelper('add', function(value, addition) {
 });
 
 UI.registerHelper('timeago', function(time) {
+	return Timeago(time);
+});
+
+
+UI.registerHelper('debug', function() {
+	console.log("vvv=================vvv");
+	console.log(this);
+	console.log("^^^=================^^^");
+});
+
+Timeago = function(time) {
 	var
 		local  = new Date().getTime(),
 		offset = Math.abs(Math.floor((local - time)/1000)),
@@ -54,14 +65,7 @@ UI.registerHelper('timeago', function(time) {
 	span = span.join(' ');
 
 	return span + ' ago';
-});
-
-
-UI.registerHelper('debug', function() {
-	console.log("vvv=================vvv");
-	console.log(this);
-	console.log("^^^=================^^^");
-});
+};
 
 FormErrors = {
 	show: function(parent, type, message, style) {
