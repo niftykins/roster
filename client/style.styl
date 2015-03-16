@@ -31,9 +31,10 @@ user-select()
 transform()
 	vendor(transform, arguments)
 
-classColour(colour)
+classColour(colour, font=#000)
 	background-color colour
 	border-color colour
+	color font
 
 selectionColour(colour)
 	border-color colour
@@ -716,7 +717,7 @@ body
 	classColour(colour-warlock)
 
 .shaman
-	classColour(colour-shaman)
+	classColour(colour-shaman, #fff)
 
 .mage
 	classColour(colour-mage)
