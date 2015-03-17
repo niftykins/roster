@@ -287,6 +287,7 @@ function makeBoss(name, id, instance, number) {
 		healers: [],
 		tanks: [],
 		number: number,
+		lastUpdated: {},
 		spots: {
 			melee: 0,
 			casters: 0,

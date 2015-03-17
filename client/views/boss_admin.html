@@ -57,7 +57,7 @@
 		<div class="slots column">
 			{{#if melees.length}}
 				<div class="role">
-					<img class="ui left floated image" src="/melee.png">
+					<img class="ui left floated image" src="/melee.png" title="updated {{timeago lastUpdated.melees}}">
 					<div class="row">
 						<div class="melee players">
 							{{#each melees}}
@@ -75,7 +75,7 @@
 
 			{{#if casters.length}}
 				<div class="role">
-					<img class="ui left floated image" src="/caster.png">
+					<img class="ui left floated image" src="/caster.png" title="updated {{timeago lastUpdated.casters}}">
 					<div class="row">
 						<div class="casters players">
 							{{#each casters}}
@@ -93,7 +93,7 @@
 
 			{{#if healers.length}}
 				<div class="role">
-					<img class="ui left floated image" src="/healer.png">
+					<img class="ui left floated image" src="/healer.png" title="updated {{timeago lastUpdated.healers}}">
 					<div class="row">
 						<div class="healers players">
 							{{#each healers}}
@@ -111,7 +111,7 @@
 
 			{{#if tanks.length}}
 				<div class="role">
-					<img class="ui left floated image" src="/tank.png">
+					<img class="ui left floated image" src="/tank.png" title="updated {{timeago lastUpdated.tanks}}">
 					<div class="row">
 						<div class="tanks players">
 							{{#each tanks}}

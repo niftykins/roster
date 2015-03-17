@@ -145,7 +145,10 @@ Meteor.methods({
 		var update = {};
 		update[player.role+'s'] = player._id;
 
-		Bosses.update({name:bossName}, {$addToSet:update});
+		var time = {};
+		time['lastUpdated.'+player.role+'s'] = Date.now();
+
+		Bosses.update({name:bossName}, {$addToSet:update, $set:time});
 	},
 
 	removeFromBoss: function(boss, name) {
@@ -159,7 +162,10 @@ Meteor.methods({
 		var update = {};
 		update[player.role+'s'] = player._id;
 
-		Bosses.update({name:boss}, {$pull:update});
+		var time = {};
+		time['lastUpdated.'+player.role+'s'] = Date.now();
+
+		Bosses.update({name:boss}, {$pull:update, $set: time});
 	},
 
 	changeSpot: function(value, spot, boss) {
