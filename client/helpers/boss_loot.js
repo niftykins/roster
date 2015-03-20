@@ -100,15 +100,7 @@ Template.loot_player_filter.helpers({
 });
 
 var setFilter = function(value) {
-	var player = Players.findOneFaster({name: value});
-	var token = localStorage.getItem('token');
-
-	var match = player && player.secret && SHA256(token) === player.secret;
-
-	Session.set({
-		'lootsheetUser': value,
-		'tokenMatch': match
-	});
+	Session.set('lootsheetUser', value);
 };
 
 Template.loot_player_filter.events({

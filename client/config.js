@@ -36,4 +36,15 @@ Meteor.startup(function() {
 			FancySupport.clear();
 		}
 	});
+
+	Tracker.autorun(function() {
+		Session.get('token'); // triggers rerun on change
+
+		var player = Players.findOneFaster({name: Session.get('lootsheetUser')});
+		var token = localStorage.getItem('token');
+
+		var match = player && player.secret && SHA256(token) === player.secret;
+
+		Session.set('tokenMatch', match);
+	});
 });

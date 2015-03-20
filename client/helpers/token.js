@@ -17,3 +17,9 @@ Template.token.events({
 		Router.go('lootsheet');
 	}
 });
+
+Template.token.helpers({
+	getToken: function() {
+		return localStorage.getItem('token');
+	}
+});
