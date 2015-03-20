@@ -273,6 +273,20 @@ Meteor.methods({
 			item = itemDecider(item);
 			Items.update(item._id, item);
 		});
+	},
+
+	regenToken: function(playerName) {
+		check(playerName, String);
+
+		checkUser();
+
+		var token = Random.id(8);
+		var secret = SHA256(token);
+
+		Players.update({name: playerName}, {$set: {
+			token: token,
+			secret: secret
+		}});
 	}
 });
 

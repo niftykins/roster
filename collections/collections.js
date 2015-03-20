@@ -47,12 +47,17 @@ Meteor.methods({
 			throw new Meteor.Error(422, "Click on a class colour you bad.");
 		}
 
+		var token = Random.id(8);
+		var secret = SHA256(token);
+
 		var player = {
 			name: data.name,
 			role: data.role,
 			class: data.class,
 			wants: {},
-			coining: {}
+			coining: {},
+			token: token,
+			secret: secret
 		};
 
 		var existing = Players.findOne({name: player.name});

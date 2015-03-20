@@ -1,0 +1,15 @@
+<template name="tokens">
+	<div class="tokens">
+		{{#each this}}
+			{{> token_person}}
+		{{/each}}
+	</div>
+</template>
+
+<template name="token_person">
+	<div class="ui segment person">
+		<div class="player {{class}}">{{name}}</div>
+		<div class="token"><code>{{token}}</code></div>
+		<i class="black refresh icon"></i>
+	</div>
+</template>
