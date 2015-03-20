@@ -44,7 +44,11 @@ Template.item_selections.events({
 		var next = selectionsList[i];
 		if ( ! next) return;
 
-		Meteor.call('makeSelection', next, itemID, playerName, function(error) {
+		var token = localStorage.getItem('token');
+		var player = Players.findOneFaster({name: playerName});
+		if (SHA256(token) !== player.secret) return;
+
+		Meteor.call('makeSelection', next, itemID, playerName, token, function(error) {
 			if(error) return console.log(error);
 		});
 
@@ -56,7 +60,7 @@ Template.item_other.events({
 	'click .player': function(e) {
 		var $t = $(e.target);
 
-		Session.set('lootsheetUser', $t.attr('name'));
+		setFilter($t.attr('name'));
 	}
 });
 
@@ -69,12 +73,15 @@ Template.boss_coin.events({
 		var playerName = Session.get('lootsheetUser');
 		var boss = this.bossID;
 
-		Meteor.call('makeCoin', value, boss, playerName, function(error) {
+		var token = localStorage.getItem('token');
+		var player = Players.findOneFaster({name: playerName});
+		if (SHA256(token) !== player.secret) return;
+
+		Meteor.call('makeCoin', value, boss, playerName, token, function(error) {
 			if(error) return console.log(error);
 		});
 	}
 });
-
 
 // FILTER BOX
 
@@ -93,7 +100,15 @@ Template.loot_player_filter.helpers({
 });
 
 var setFilter = function(value) {
-	Session.set('lootsheetUser', value);
+	var player = Players.findOneFaster({name: value});
+	var token = localStorage.getItem('token');
+
+	var match = player && player.secret && SHA256(token) === player.secret;
+
+	Session.set({
+		'lootsheetUser': value,
+		'tokenMatch': match
+	});
 };
 
 Template.loot_player_filter.events({
@@ -108,7 +123,7 @@ Template.loot_player_filter.events({
 	},
 
 	'click .close': function(e) {
-		Session.set('lootsheetUser', null);
+		setFilter(null);
 	},
 
 	'click .update': function(e) {

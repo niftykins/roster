@@ -32,7 +32,16 @@
 			<a href="{{pathFor 'order'}}" title="reorder bosses">
 				<i class="smaller bigger black ordered list icon"></i>
 			</a>
+			<a href="{{pathFor 'tokens'}}" title="view player tokens">
+				<i class="smaller bigger black key icon"></i>
+			</a>
 		{{/if}}
+
+		{{#unless user}}
+			<a href="{{pathFor 'token'}}" title="add player token">
+				<i class="smaller bigger black key icon"></i>
+			</a>
+		{{/unless}}
 	</div>
 </template>
 

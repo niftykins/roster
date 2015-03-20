@@ -14,6 +14,10 @@ UI.registerHelper('getLootsheetUser', function() {
 	return Session.get('lootsheetUser');
 });
 
+UI.registerHelper('tokenMatch', function() {
+	return Session.get('tokenMatch');
+});
+
 UI.registerHelper('gridView', function() {
 	return Session.get('view');
 });

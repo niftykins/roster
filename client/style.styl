@@ -41,6 +41,8 @@ selectionColour(colour)
 	background-color rgba(colour, 0.5)
 	&:hover
 		background-color darken(@background-color, 10%)
+	&.noop:hover
+		background-color @background-color
 
 veticalCenter()
 	position absolute
@@ -285,6 +287,9 @@ body
 		&.coining
 			background-color colour-add
 
+		&.noop
+			cursor initial
+
 		img
 			margin-top 5px
 			width 40px
@@ -367,6 +372,9 @@ body
 				selectionColour(#A335EE)
 			&[name="the dream"]
 				selectionColour(#FF8000)
+
+			&.noop
+				cursor initial
 
 		.others
 			overflow hidden
@@ -658,6 +666,7 @@ body
 
 // SUBMIT FORMS
 
+.token.form
 .remove.form,
 .player.form
 	position relative

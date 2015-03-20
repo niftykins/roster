@@ -7,7 +7,12 @@ Meteor.publish('instances', function() {
 });
 
 Meteor.publish('players', function() {
-	return Players.find();
+	var fields = {token: 0};
+
+	var user = Meteor.users.findOne(this.userId);
+	if (user && user.admin) fields = {};
+
+	return Players.find({}, {fields: fields});
 });
 
 Meteor.publish('items', function() {

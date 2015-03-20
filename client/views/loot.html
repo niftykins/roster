@@ -51,7 +51,8 @@
 </template>
 
 <template name="boss_coin">
-	<div class="coin {{#if coining}}coining{{/if}}" title="{{#if coining}}coining{{else}}not coining{{/if}}">
+	<div class="coin {{#if coining}}coining{{/if}} {{#unless tokenMatch}}noop{{/unless}}"
+		title="{{#if coining}}coining{{else}}not coining{{/if}}">
 		<img src="/coin.png" />
 	</div>
 </template>
@@ -63,7 +64,7 @@
 </template>
 
 <template name="item_selections">
-	<div name="{{selection}}" class="no-select selection">
+	<div name="{{selection}}" class="no-select selection {{#unless tokenMatch}}noop{{/unless}}">
 		{{selection}}
 	</div>
 </template>
@@ -95,11 +96,9 @@
 		{{/if}}
 
 		{{#if getLootsheetUser}}
-			<div class="update">
-				<div>
-					update
-				</div>
-			</div>
+			{{#if tokenMatch}}
+				<div class="update"><div>update</div></div>
+			{{/if}}
 		{{/if}}
 	</div>
 </template>

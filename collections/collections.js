@@ -6,7 +6,8 @@ Lootsheet = new Meteor.Collection('lootsheet');
 
 isAdmin = function(user) {
 	user = user || Meteor.user();
-	if(user)
+
+	if (user)
 		return user.admin;
 	else
 		return false;
@@ -15,10 +16,10 @@ isAdmin = function(user) {
 checkUser = function(user) {
 	user = user || Meteor.user();
 
-	if(!user) // not logged in
+	if ( ! user) // not logged in
 		throw new Meteor.Error(401, "You need to login to do that.");
 
-	if(!isAdmin(user)) // if they aren't someone with permission
+	if ( ! isAdmin(user)) // if they aren't someone with permission
 		throw new Meteor.Error(403, "You don't have permission to do that.");
 
 	return true;
@@ -207,10 +208,11 @@ Meteor.methods({
 		Bosses.update(b._id, {$inc: {number: -value}});
 	},
 
-	makeSelection: function(selection, itemID, playerName) {
+	makeSelection: function(selection, itemID, playerName, token) {
 		check(selection, String);
 		check(itemID, Match.Integer);
 		check(playerName, String);
+		check(token, String);
 
 		if ( ! _.contains(['none', 'side', 'any', 'mythic', 'bis', 'the dream'], selection))
 			throw new Meteor.Error(422, "Invalid selection.");
@@ -218,18 +220,29 @@ Meteor.methods({
 		var u = {lastUpdated: Date.now()};
 		u['wants.'+itemID] = selection;
 
-		Players.update({name: playerName}, {$set: u});
+		var player = Players.findOneFaster({name: playerName});
+
+		if (SHA256(token) !== player.secret)
+			throw new Meteor.Error(401, "Token mismatch.");
+
+		Players.update(player._id, {$set: u});
 	},
 
-	makeCoin: function(value, bossID, playerName) {
+	makeCoin: function(value, bossID, playerName, token) {
 		check(value, Boolean);
 		check(bossID, Match.Integer);
 		check(playerName, String);
+		check(token, String);
 
 		var u = {lastUpdated: Date.now()};
 		u['coining.'+bossID] = value;
 
-		Players.update({name: playerName}, {$set: u});
+		var player = Players.findOneFaster({name: playerName});
+
+		if (SHA256(token) !== player.secret)
+			throw new Meteor.Error(401, "Token mismatch.");
+
+		Players.update(player._id, {$set: u});
 	},
 
 	updateLastUpdated: function(playerName) {
