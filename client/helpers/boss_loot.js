@@ -78,7 +78,7 @@ Template.boss_coin.events({
 		if (SHA256(token) !== player.secret) return;
 
 		Meteor.call('makeCoin', value, boss, playerName, token, function(error) {
-			if(error) return console.log(error);
+			if (error) return console.log(error);
 		});
 	}
 });
@@ -109,7 +109,7 @@ Template.loot_player_filter.events({
 	},
 
 	'keypress .filter input': function(e) {
-		if(e.which === 13) {
+		if (e.which === 13) {
 			setFilter($(e.target).val().toLowerCase());
 		}
 	},

@@ -6,7 +6,7 @@ Template.token.events({
 
 		var token = $t.find('[name="token"]').val();
 
-		if( ! token) {
+		if ( ! token) {
 			FormErrors.show(e.target, 422, "Enter a token, noob.");
 			return;
 		}

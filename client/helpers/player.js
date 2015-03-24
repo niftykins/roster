@@ -10,7 +10,7 @@ Template.player_admin.events({
 	'click .player': function(e) {
 		var $t = $(e.target).closest('.player');
 
-		if(isAdmin()) {
+		if (isAdmin()) {
 			var call = $t.hasClass('out') ? 'addToBoss' : 'removeFromBoss';
 
 			var player = $t.attr('name');

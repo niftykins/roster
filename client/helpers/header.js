@@ -24,7 +24,7 @@ Template.search.events({
 	},
 
 	'keypress .filter input': function(e) {
-		if(e.which === 13) {
+		if (e.which === 13) {
 			setFilter($(e.target).val().toLowerCase());
 		}
 	},

@@ -19,7 +19,7 @@ Template.order_boss.events({
 		var instance = Session.get('instance');
 
 		Meteor.call('changeOrder', value, boss, instance, function(error) {
-			if(error) return console.log(error);
+			if (error) return console.log(error);
 
 			FancySupport.event({
 				name: 'change_order',

@@ -7,18 +7,18 @@ Template.login.events({
 		var username = $t.find('[name=username]').val();
 		var password = $t.find('[name=password]').val();
 
-		if(!username) {
+		if ( ! username) {
 			FormErrors.show(e.target, 422, "How do you expect to login without a username?");
 			return;
 		}
 
-		if(!password) {
+		if ( ! password) {
 			FormErrors.show(e.target, 422, "Forgot passowrd you noob.");
 			return;
 		}
 
 		Meteor.loginWithPassword(username, password, function(error) {
-			if(error)
+			if (error)
 				FormErrors.show(e.target, error.error, error.reason);
 			else
 				Router.go('roster');

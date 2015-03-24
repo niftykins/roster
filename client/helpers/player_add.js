@@ -26,17 +26,17 @@ Template.add.events({
 		var role = $t.find('[name=role]').val();
 		var type = $t.find('[name=class]').val();
 
-		if(!name) {
+		if ( ! name) {
 			FormErrors.show(e.target, 422, "Enter a name, noob.");
 			return;
 		}
 
-		if(!role) {
+		if ( ! role) {
 			FormErrors.show(e.target, 422, "Worst. Click on a role.");
 			return;
 		}
 
-		if(!type) {
+		if ( ! type) {
 			FormErrors.show(e.target, 422, "Click on a class colour you bad.");
 			return;
 		}
@@ -48,7 +48,7 @@ Template.add.events({
 		};
 
 		Meteor.call('addPlayer', player, function(error) {
-			if(error) return FormErrors.show(e.target, error.error, error.reason);
+			if (error) return FormErrors.show(e.target, error.error, error.reason);
 
 			FancySupport.event({
 				name: 'create_player',

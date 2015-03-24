@@ -16,13 +16,13 @@ Template.remove.events({
 
 		var name = $t.find('[name=name]').val().toLowerCase();
 
-		if(!name) {
+		if ( ! name) {
 			FormErrors.show(e.target, 422, "Enter a name, noob.");
 			return;
 		}
 
 		Meteor.call('removePlayer', name, function(error) {
-			if(error) return FormErrors.show(e.target, error.error, error.reason);
+			if (error) return FormErrors.show(e.target, error.error, error.reason);
 
 			FancySupport.event({
 				name: 'delete_player',

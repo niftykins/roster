@@ -7,7 +7,7 @@ Template.boss_admin.events({
 		var boss = $t.parent().parent().attr('name');
 
 		Meteor.call('changeSpot', value, spot, boss, function(error) {
-			if(error) return console.log(error);
+			if (error) return console.log(error);
 
 			FancySupport.event({
 				name: 'change_spot',
@@ -24,8 +24,8 @@ Template.boss_admin.events({
 Template.boss_admin.helpers({
 	'subs': function(role) {
 		var sort = function(a,b) {
-			if(a.change !== b.change) return (a.change < b.change) ? -1 : 1;
-			if(a.class !== b.class) return (a.class > b.class) ? -1 : 1;
+			if (a.change !== b.change) return (a.change < b.change) ? -1 : 1;
+			if (a.class !== b.class) return (a.class > b.class) ? -1 : 1;
 			return (a.name < b.name) ? -1 : 1;
 		};
 
