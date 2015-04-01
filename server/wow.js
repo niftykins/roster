@@ -169,16 +169,16 @@ WOW = {
 	},
 
 	inventoryType: {
-		0: "",
+		0: "other",
 		1: "head",
 		2: "neck",
-		3: "shoulder",
+		3: "shoulders",
 		4: "shirt",
 		5: "chest",
 		6: "waist",
 		7: "legs",
 		8: "feet",
-		9: "wrist",
+		9: "wrists",
 		10: "hands",
 		11: "ring",
 		12: "trinket",
@@ -189,7 +189,7 @@ WOW = {
 		17: "2h",
 		18: "bag",
 		19: "tabard",
-		20: "robe",
+		20: "chest", // robe
 		21: "main hand",
 		22: "offhand",
 		23: "offhand",

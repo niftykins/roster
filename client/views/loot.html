@@ -3,8 +3,12 @@
 		{{> loot_player_filter}}
 		{{> lootsheet_help_icon}}
 
-		{{#each this}}
-			{{> boss_loot}}
+		{{#each data}}
+			{{#if ../slotView}}
+				{{> loot_slot}}
+			{{else}}
+				{{> boss_loot}}
+			{{/if}}
 		{{/each}}
 	</div>
 </template>
@@ -29,6 +33,41 @@
 
 			<div class="items">
 				{{#each loot}}
+					<div class="row">
+						<div class="left {{#if selection}}wide{{/if}}">
+							{{> item}}
+
+							{{#if selection}}
+								{{> item_selections}}
+							{{/if}}
+						</div>
+
+						<div class="others">
+							{{#each others}}
+								{{> item_other}}
+							{{/each}}
+						</div>
+					</div>
+				{{/each}}
+			</div>
+		{{/unless}}
+	</div>
+</template>
+
+<template name="loot_slot">
+	<div class="ui segment grid boss loot">
+		<div class="panel">
+			<img class="icon" src="/slots/{{slot}}.png">
+			<h2 class="name">{{capitalise slot}}</h2>
+		</div>
+
+		<div class="toggle">
+			<i name="toggle" class="{{#if hideLoot}}expand{{else}}collapse{{/if}} icon" title="toggle loot display"></i>
+		</div>
+
+		{{#unless hideLoot}}
+			<div class="items">
+				{{#each items}}
 					<div class="row">
 						<div class="left {{#if selection}}wide{{/if}}">
 							{{> item}}

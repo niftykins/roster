@@ -27,6 +27,10 @@ UI.registerHelper('pluralize', function(n, thing) {
 	else return n + ' ' + thing + 'es';
 });
 
+UI.registerHelper('capitalise', function(thing) {
+	return thing.charAt(0).toUpperCase() + thing.substring(1);
+});
+
 UI.registerHelper('add', function(value, addition) {
 	value = parseFloat(value);
 	addition = parseFloat(addition);
