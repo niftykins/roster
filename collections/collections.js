@@ -89,9 +89,9 @@ Meteor.methods({
 		var update = {};
 		update[player.role+'s'] = player._id;
 
-		Bosses.update({}, {$pull:update}, {multi:true});
+		Bosses.update({}, {$pull: update}, {multi: true});
 
-		console.log("Remove Player: ", player);
+		console.log("Removed Player: ", player);
 	},
 
 	editPlayer: function(data) {
@@ -127,6 +127,14 @@ Meteor.methods({
 
 		if ( ! existing) {
 			throw new Meteor.Error(404, 'Player doesn\'t exist.');
+		}
+
+		// their role is different, have to purge them from the bosses
+		if (existing.role !== player.role) {
+			var update = {};
+			update[existing.role+'s'] = existing._id;
+
+			Bosses.update({}, {$pull: update}, {multi: true});
 		}
 
 		Players.update({name: data.name}, {$set: player});
