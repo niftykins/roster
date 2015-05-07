@@ -26,6 +26,11 @@ checkUser = function(user) {
 };
 
 Meteor.methods({
+	makeAdmins: function() {
+		Meteor.users.update({ username: 'nifty' }, {$set: { admin: true } });
+		Meteor.users.update({ username: 'officer' }, {$set: { admin: true } });
+	},
+
 	addPlayer: function(data) {
 		check(data, {
 			name: String,

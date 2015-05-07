@@ -33,10 +33,6 @@ Meteor.publish('userData', function() {
 	return user;
 });
 
-Meteor.users.update({ username: 'nifty' }, {$set: { admin: true } });
-Meteor.users.update({ username: 'officer' }, {$set: { admin: true } });
-
-
 var crypto = Npm.require('crypto');
 var FancySupportSignatureGenerator = function(cid) {
 	var secret = Meteor.settings && Meteor.settings.fancysupport && Meteor.settings.fancysupport.secret;
