@@ -89,6 +89,8 @@ Roles.prototype.healers = function() {
 };
 
 var itemDecider = function(item) {
+	console.log('BEFORE', item);
+
 	// tier token
 	if ( ! item.equippable) {
 		item.allowedClasses = item._allowableClasses.map(function(n) {
@@ -110,6 +112,7 @@ var itemDecider = function(item) {
 			case 'Gauntlets': t = 10; break;
 			case 'Helm': t = 1; break;
 			case 'Essence': t = 0; break;
+			case 'Badge': t = 12; break;
 		}
 		item.inventoryType = t;
 	}
@@ -122,10 +125,17 @@ var itemDecider = function(item) {
 	if (item.equippable) {
 		// classes
 		var able = [];
-		WOW.allClasses.forEach(function(cl) {
-			if (_.contains(WOW.classCanUse[cl], item.subType) || item.slot === 'cloak')
-				able.push(cl);
-		});
+		if (item._allowableClasses) {
+			able = item._allowableClasses.map(function(n) {
+				return WOW.classes[n];
+			});
+		}
+		else {
+			WOW.allClasses.forEach(function(cl) {
+				if (_.contains(WOW.classCanUse[cl], item.subType) || item.slot === 'cloak')
+					able.push(cl);
+			});
+		}
 		item.allowedClasses = _.unique(able);
 
 		// filtering based on stats
@@ -181,6 +191,13 @@ var itemDecider = function(item) {
 					able.wipe().healers();
 					return true;
 				}
+
+				// proc with "<number> strength"
+				if (/\d+ strength/.test(desc)) {
+					able.wipe().strength();
+				}
+
+				console.log(desc);
 			});
 		}
 
@@ -190,6 +207,8 @@ var itemDecider = function(item) {
 
 		item.allowed = able;
 	}
+
+	console.log('AFTER', item);
 
 	return item;
 };
@@ -244,7 +263,7 @@ Meteor.methods({
 
 				item = itemDecider(item);
 
-				console.log('%d: %s, %s %s %s, from %d', item.itemID, item.name, item.rarity, item.type, item.slot, item.sourceID, item.allowed);
+				// console.log('%d: %s, %s %s %s, from %d', item.itemID, item.name, item.rarity, item.type, item.slot, item.sourceID, item.allowed);
 
 				Items.upsert({itemID: item.itemID}, item);
 			}
@@ -352,4 +371,20 @@ setupInstance('blackrock foundry', 6967, [
 	['Operator Thogar', 76906],
 	['Oregorger', 77182],
 	['Warlord Blackhand', 77325]
+]);
+
+setupInstance('hellfire citadel', 7545, [
+	['Hellfire Assault', 95068],
+	['Iron Reaver', 90284],
+	['Kormrok', 90776],
+	['Kilrogg Deadeye', 90378],
+	['Hellfire High Council', 92146],
+	['Gorefiend', 91809],
+	['Shadow-Lord Iskar', 95067],
+	['Socrethar the Eternal', 90296],
+	['Tyrant Velhari', 93439],
+	['Fel Lord Zakuun', 89890],
+	['Xhul\'horac', 93068],
+	['Mannoroth', 91349],
+	['Archimonde', 91331]
 ]);

@@ -13,9 +13,9 @@ accounts-ui
 accounts-password
 jquery
 meteorhacks:kadira
-sergeyt:typeahead
 
 nooitaf:semantic-ui@0.19.3
 stylus
 http
 sha
+sergeyt:typeahead
