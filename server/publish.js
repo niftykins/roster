@@ -182,22 +182,25 @@ var itemDecider = function(item) {
 			item.itemSpells.some(function(s) {
 				var desc = s.spell.description.toLowerCase();
 
-				if (desc.indexOf('armor') > -1) {
+				if (/\d+ armor/.test(desc)) {
 					able.wipe().tanks();
 					return true;
 				}
 
-				if (desc.indexOf('spirit') > -1) {
+				if (/\d+ spirit/.test(desc)) {
 					able.wipe().healers();
 					return true;
 				}
 
-				// proc with "<number> strength"
 				if (/\d+ strength/.test(desc)) {
 					able.wipe().strength();
+					return true;
 				}
 
-				console.log(desc);
+				if (/\d+ agility/.test(desc)) {
+					able.wipe().agility();
+					return true;
+				}
 			});
 		}
 
