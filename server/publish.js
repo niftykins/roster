@@ -201,6 +201,17 @@ var itemDecider = function(item) {
 					able.wipe().agility();
 					return true;
 				}
+
+				if (/\d+ intellect/.test(desc)) {
+					able.wipe().intellect();
+					return true;
+				}
+
+				// super edge cases
+				if (/(reducing all damage taken)/.test(desc)) {
+					able.wipe().tanks();
+					return true;
+				}
 			});
 		}
 
