@@ -89,8 +89,6 @@ Roles.prototype.healers = function() {
 };
 
 var itemDecider = function(item) {
-	console.log('BEFORE', item);
-
 	// tier token
 	if ( ! item.equippable) {
 		item.allowedClasses = item._allowableClasses.map(function(n) {
@@ -150,7 +148,7 @@ var itemDecider = function(item) {
 			if (item.slot === 'shield') {
 				able.wipe();
 				able.tank = ['paladin', 'warrior'];
-				able.healer = ['shaman'];
+				able.healer = ['shaman', 'paladin'];
 				able.caster = ['shaman'];
 				return true;
 			}
@@ -221,8 +219,6 @@ var itemDecider = function(item) {
 
 		item.allowed = able;
 	}
-
-	console.log('AFTER', item);
 
 	return item;
 };
